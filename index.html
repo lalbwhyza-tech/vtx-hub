@@ -220,7 +220,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المربوط مباشرة برابط ملفك من موقع BetaDrop -->
+        <!-- زر التثبيت اللاسلكي الفوري للآيفون -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -233,8 +233,9 @@
 
     <script>
         function triggerDirectInstall() {
-            // فتح رابط تطبيقك من BetaDrop مباشرة للتحميل
-            window.open("https://betadrop.app/app/ytP4L3", "_blank");
+            // كود استدعاء بروتوكول أبل اللاسلكي لتنبثق نافذة (إلغاء / تثبيت) مباشرة
+            const plistUrl = "https://betadrop.app";
+            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
         }
     </script>
 </body>
