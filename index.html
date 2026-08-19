@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHD HUB — DELTA App</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1a0007, #3d0011);
+            --bg-solid: #1a0007;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-bg-hover: rgba(255, 255, 255, 0.07);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --raised-bg: rgba(255, 255, 255, 0.06);
+            --accent-red: #cc0033;
+            --accent-hover: #ff1a53;
+            --accent-soft: rgba(204, 0, 51, 0.15);
+            --gold: #ffb703;
+            --danger-color: #ff4757;
+            --success-color: #2ed573;
+            --online: #00ff66;
+            --text-color: #ffffff;
+            --text-muted: #aaaaaa;
+            --text-faint: #7a7a7a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px 16px 60px 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.6;
+        }
+
+        /* ===== Top bar ===== */
+        .top-bar {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+        .brand-mark {
+            display: flex; align-items: center; gap: 8px;
+            font-weight: 800; letter-spacing: 1px; font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        .brand-mark .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red);
+        }
+        .menu-btn {
+            background: var(--accent-red);
+            border: none;
+            border-radius: 14px;
+            width: 46px; height: 46px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(204, 0, 51, 0.35);
+            transition: transform 0.15s, background-color 0.2s;
+        }
+        .menu-btn:hover { background: var(--accent-hover); }
+        .menu-btn:active { transform: scale(0.94); }
+        .menu-btn .bars {
+            display: flex; flex-direction: column; gap: 5px;
+        }
+        .menu-btn .bars span {
+            display: block; width: 20px; height: 2px;
+            background: #fff; border-radius: 2px; transition: transform 0.25s, opacity 0.25s;
+        }
+        .menu-btn.open .bars span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-btn.open .bars span:nth-child(2) { opacity: 0; }
+        .menu-btn.open .bars span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ===== Menu panel ===== */
+        .menu-panel {
+            width: 100%; max-width: 480px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 16px;
+            padding: 8px;
+            margin-bottom: 22px;
+            max-height: 0; overflow: hidden; opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+        }
+        .menu-panel.open {
+            max-height: 320px; opacity: 1; padding: 8px;
+        }
+        .menu-panel button {
+            width: 100%; text-align: right;
+            background: transparent; border: none; color: var(--text-color);
+            padding: 14px 16px; border-radius: 12px; cursor: pointer;
+            font-family: inherit; font-size: 1rem; font-weight: 600;
+            display: flex; align-items: center; gap: 12px;
+            transition: background-color 0.2s;
+        }
+        .menu-panel button:hover { background: var(--card-bg-hover); }
+        .menu-panel button.active { background: var(--accent-soft); color: var(--accent-hover); }
+        .menu-panel button svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+        /* ===== Container ===== */
+        .app-container {
+            width: 100%; max-width: 480px; text-align: center;
+        }
+        .section { display: none; animation: fadeUp 0.3s ease; }
+        .section.active { display: block; }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== Hero ===== */
+        .status-badge {
+            background: var(--accent-soft);
+            border: 1px solid var(--accent-red);
+            color: #ff5577;
+            padding: 7px 16px; border-radius: 20px;
+            font-size: 0.85rem; font-weight: bold;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-bottom: 22px;
+        }
+        .status-badge::before {
+            content: ''; width: 8px; height: 8px;
+            background: var(--online); border-radius: 50%;
+            box-shadow: 0 0 8px var(--online);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .app-icon {
+            width: 92px; height: 92px;
+            background: linear-gradient(145deg, #cc0033, #7a0020);
+            border-radius: 22px;
+            margin: 0 auto 16px auto;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 12px 30px rgba(204, 0, 51, 0.4);
+            position: relative; overflow: hidden;
+        }
+        .app-icon::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(160deg, rgba(255,255,255,0.18), transparent 55%);
+        }
+        .app-icon svg { width: 46px; height: 46px; color: #fff; z-index: 1; }
+
+        .app-title-area {
+            display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;
+        }
+        .app-title { font-size: 2rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .version-badge {
+            background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 8px;
+            font-size: 0.72rem; font-weight: bold; color: var(--text-muted);
+        }
+        .hero-sub { color: var(--text-muted); font-size: 0.95rem; margin: 0 auto 18px auto; max-width: 340px; }
+
+        .rating-row {
+            display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 26px;
+        }
+        .stars { display: flex; gap: 3px; }
+        .stars svg { width: 18px; height: 18px; color: var(--gold); }
+        .stars svg.empty { color: rgba(255,255,255,0.18); }
+        .rating-text { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* ===== Feature cards ===== */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 26px;
+        }
+        .feature-card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 14px; padding: 18px 14px; text-align: center;
+            transition: transform 0.15s, background-color 0.2s;
+        }
+        .feature-card:active { transform: scale(0.97); }
+        .feature-card .ficon {
+            width: 44px; height: 44px; margin: 0 auto 10px auto;
+            background: var(--accent-soft); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .feature-card .ficon svg { width: 22px; height: 22px; color: var(--accent-hover); }
+        .feature-card h4 { margin: 0 0 4px 0; font-size: 0.92rem; font-weight: 700; }
+        .feature-card p { margin: 0; font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; }
+
+        /* ===== Primary action ===== */
+        .hero-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+        .btn {
+            border: none; cursor: pointer; font-family: inherit; font-weight: bold;
+            border-radius: 14px; padding: 14px 20px; font-size: 1rem;
+            transition: transform 0.15s, background-color 0.2s, opacity 0.2s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: var(--accent-red); color: #fff; box-shadow: 0 8px 22px rgba(204,0,51,0.35); }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-ghost { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); }
+        .btn-ghost:hover { background: var(--card-bg-hover); }
+        .btn-danger { background: var(--danger-color); color: #fff; }
+        .btn-danger:hover { opacity: 0.88; }
+        .btn-full { width: 100%; }
+        .btn svg { width: 20px; height: 20px; }
+
+        /* ===== Cards / panels ===== */
+        .panel {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px; padding: 22px; text-align: right; margin-bottom: 18px;
+        }
+        .panel h2 { margin: 0 0 6px 0; font-size: 1.3rem; font-weight: 800; }
+        .panel .panel-sub { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 18px 0; }
+        .panel hr { border: none; border-top: 1px solid var(--card-border); margin: 20px 0; }
+        .panel h3 { margin: 0 0 8px 0; font-size: 1.05rem; font-weight: 700; }
+
+        label { display: block; margin: 12px 0 4px 0; color: var(--text-muted); font-size: 0.85rem; }
+        input, textarea, select {
+            width: 100%; padding: 12px 14px; margin: 3px 0;
+            border: 1px solid var(--card-border); border-radius: 11px;
+            background: rgba(0,0,0,0.25); color: var(--text-color);
+            font-family: inherit; font-size: 0.95rem;
+        }
+        input::placeholder, textarea::placeholder { color: var(--text-faint); }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-red); }
+
+        .field-row { display: flex; gap: 10px; }
+        .field-row > div { flex: 1; }
+
+        /* ===== Script card ===== */
+        .script-card {
+            background: var(--raised-bg); border: 1px solid var(--card-border);
+            border-radius: 14px; padding: 16px; margin-top: 14px; text-align: right;
+        }
+        .script-card h4 { margin: 0 0 10px 0; color: var(--accent-hover); font-size: 1rem; }
+        .script-card img {
+            max-width: 100%; max-height: 200px; object-fit: cover;
+            border-radius: 10px; margin-bottom: 10px; display: block;
+        }
+        .script-card pre {
+            background: rgba(0,0,0,0.4); padding: 13px; border-radius: 10px;
+            overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+            margin: 8px 0 0 0; font-size: 0.83rem; direction: ltr; text-align: left;
+        }
+
+        /* ===== Code badge / meta ===== */
+        .code-badge {
+            display: inline-block; background: rgba(0,0,0,0.3);
+            border: 1px dashed var(--card-border);
+            padding: 4px 10px; border-radius: 8px;
+            font-family: monospace; font-size: 0.88rem; margin: 2px;
+        }
+        .meta-row { color: var(--text-muted); font-size: 0.82rem; margin: 6px 0; }
+        .meta-row b { color: var(--text-color); }
+
+        /* ===== Empty & note ===== */
+        .empty {
+            color: var(--text-muted); text-align: center; padding: 28px 16px;
+            background: var(--card-bg); border: 1px dashed var(--card-border);
+            border-radius: 14px; font-size: 0.9rem;
+        }
+        .note { color: var(--text-muted); font-size: 0.82rem; margin: 0 0 14px 0; }
+
+        /* ===== Result banners ===== */
+        .result-ok { color: var(--success-color); font-weight: bold; margin: 12px 0; }
+        .result-err { color: var(--danger-color); font-weight: bold; margin: 12px 0; }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+            background: rgba(26,0,7,0.95); border: 1px solid var(--accent-red); color: var(--text-color);
+            padding: 13px 24px; border-radius: 14px; z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none;
+            font-weight: 600; font-size: 0.9rem;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.error { border-color: var(--danger-color); }
+        .toast.success { border-color: var(--success-color); }
+
+        /* ===== Tabs inside admin ===== */
+        .admin-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="brand-mark"><span class="dot"></span> SHD</div>
+        <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">
+            <div class="bars"><span></span><span></span><span></span></div>
+        </button>
+    </div>
+
+    <div class="menu-panel" id="menuPanel">
+        <button data-section="home" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
+            الرئيسية
+        </button>
+        <button data-section="library">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            مكتبة السكربتات
+        </button>
+        <button data-section="receive">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+            استلام كود
+        </button>
+        <button data-section="admin-login">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            دخول الإدارة
+        </button>
+    </div>
+
+    <div class="app-container">
+
+        <!-- ===== HOME ===== -->
+        <div id="home" class="section active">
+            <div class="status-badge">المنصة متاحة الآن</div>
+
+            <div class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+
+            <div class="app-title-area">
+                <h1 class="app-title">SHD HUB</h1>
+                <span class="version-badge">DELTA v2.0</span>
+            </div>
+            <p class="hero-sub">منصة إدارة وتوزيع السكربتات والأكواد. استلم سكربتك بكود مخصص، وتابع مكتبتك في مكان واحد.</p>
+
+            <div class="rating-row">
+                <div class="stars" aria-label="تقييم 4.8 من 5">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
+                </div>
+                <span class="rating-text">4.8 — منصة موثوقة</span>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                    <h4>أكواد مخصصة</h4>
+                    <p>وزّع سكربتات بأكواد مرنة تحدد عدد مرات الاستخدام.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                    <h4>مكتبة منظمة</h4>
+                    <p>كل السكربتات في مكتبة واحدة مع صور وأكواد.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/></svg></div>
+                    <h4>لوحة إدارة</h4>
+                    <p>أضف السكربتات والأكواد وتابع الاستخدام منها.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <h4>حماية محلية</h4>
+                    <p>بياناتك تبقى على جهازك، بدون خادم خارجي.</p>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <button class="btn btn-primary btn-full" onclick="showSection('receive')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+                    استلام كود
+                </button>
+                <button class="btn btn-ghost btn-full" onclick="showSection('library')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    تصفّح المكتبة
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== LIBRARY ===== -->
+        <div id="library" class="section">
+            <div class="panel">
+                <h2>مكتبة السكربتات</h2>
+                <p class="panel-sub">كل السكربتات المضافة حتى الآن.</p>
+                <div id="scripts-display" class="empty">لا توجد سكربتات مضافة حاليًا.</div>
+            </div>
+        </div>
+
+        <!-- ===== RECEIVE ===== -->
+        <div id="receive" class="section">
+            <div class="panel">
+                <h2>استلام كود السكربت</h2>
+                <p class="panel-sub">أدخل الكود الذي حصلت عليه لاستلام السكربت المخصص لك.</p>
+                <label for="user-code">الكود</label>
+                <input type="text" id="user-code" placeholder="مثال: SHD-2024-001" autocomplete="off">
+                <button class="btn btn-primary btn-full" onclick="redeemCode()">استلام السكربت</button>
+                <div id="redeem-result"></div>
+            </div>
+        </div>
+
+        <!-- ===== ADMIN LOGIN ===== -->
+        <div id="admin-login" class="section">
+            <div class="panel">
+                <h2>دخول الإدارة</h2>
+                <p class="panel-sub">كلمة المرور الافتراضية: 1234</p>
+                <label for="admin-pass">كلمة المرور</label>
+                <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور" autocomplete="current-password">
+                <button class="btn btn-primary btn-full" onclick="checkAdminLogin()">دخول</button>
+                <p id="login-error" class="result-err" style="display:none;">كلمة المرور غير صحيحة!</p>
+            </div>
+        </div>
+
+        <!-- ===== ADMIN PANEL ===== -->
+        <div id="admin-panel" class="section">
+            <div class="panel">
+                <div class="admin-head">
+                    <h2>لوحة تحكم الإدارة</h2>
+                    <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem;" onclick="adminLogout()">خروج</button>
+                </div>
+                <p class="panel-sub">أضف السكربتات والأكواد وتابع الاستخدام.</p>
+
+                <h3>إضافة سكربت جديد</h3>
+                <label for="script-name">اسم السكربت</label>
+                <input type="text" id="script-name" placeholder="مثال: سكربت الرسم السريع">
+                <label for="script-img">رابط الصورة (اختياري)</label>
+                <input type="text" id="script-img" placeholder="https://...">
+                <label for="script-code">كود السكربت البرمجي</label>
+                <textarea id="script-code" placeholder="الصق الكود هنا" rows="5"></textarea>
+                <button class="btn btn-primary btn-full" onclick="addScript()">إدراج السكربت</button>
+
+                <hr>
+
+                <h3>إنشاء كود استلام</h3>
+                <div class="field-row">
+                    <div>
+                        <label for="new-code">الكود</label>
+                        <input type="text" id="new-code" placeholder="SHD-2024-001">
+                    </div>
+                    <div>
+                        <label for="code-uses">عدد الاستخدامات</label>
+                        <input type="number" id="code-uses" placeholder="1" value="1" min="1">
+                    </div>
+                </div>
+                <label for="linked-script">السكربت المرتبط</label>
+                <select id="linked-script"></select>
+                <button class="btn btn-primary btn-full" onclick="addCode()">إضافة الكود</button>
+
+                <hr>
+
+                <h3>الأكواد الحالية</h3>
+                <div id="codes-display" class="empty">لا توجد أكواد بعد.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const ADMIN_PASSWORD = '1234';
+        const STORAGE_KEY = 'shd_data';
+
+        let data = { scripts: [], codes: [] };
+        try {
+            const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+            if (stored && Array.isArray(stored.scripts) && Array.isArray(stored.codes)) {
+                data = stored;
+            }
+        } catch (e) {
+            data = { scripts: [], codes: [] };
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {
+                showToast('تعذّر حفظ البيانات في الجهاز.', 'error');
+            }
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str == null ? '' : String(str);
+            return div.innerHTML;
+        }
+
+        function showToast(msg, type) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'toast show' + (type ? ' ' + type : '');
+            clearTimeout(showToast._t);
+            showToast._t = setTimeout(() => { t.className = 'toast'; }, 2600);
+        }
+
+        // ---------- Navigation ----------
+        const menuBtn = document.getElementById('menuBtn');
+        const menuPanel = document.getElementById('menuPanel');
+        const navButtons = menuPanel.querySelectorAll('button[data-section]');
+
+        menuBtn.addEventListener('click', () => {
+            const open = menuPanel.classList.toggle('open');
+            menuBtn.classList.toggle('open', open);
+            menuBtn.setAttribute('aria-expanded', open);
+        });
+
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                showSection(btn.dataset.section);
+                menuPanel.classList.remove('open');
+                menuBtn.classList.remove('open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active');
+            navButtons.forEach(b => b.classList.toggle('active', b.dataset.section === id));
+            const err = document.getElementById('login-error');
+            if (err) err.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ---------- Library ----------
+        function renderLibrary() {
+            const box = document.getElementById('scripts-display');
+            if (!data.scripts.length) {
+                box.className = 'empty';
+                box.innerHTML = 'لا توجد سكربتات مضافة حاليًا.';
+                return;
+            }
+            box.className = '';
+            box.innerHTML = data.scripts.map(s => `
+                <div class="script-card">
+                    <h4>${escapeHtml(s.name)}</h4>
+                    ${s.img ? `<img src="${escapeHtml(s.img)}" alt="${escapeHtml(s.name)}" onerror="this.style.display='none'">` : ''}
+                    <pre>${escapeHtml(s.code)}</pre>
+                </div>
+            `).join('');
+        }
+
+        // ---------- Redeem ----------
+        function redeemCode() {
+            const input = document.getElementById('user-code');
+            const result = document.getElementById('redeem-result');
+            const code = input.value.trim();
+            result.innerHTML = '';
+
+            if (!code) {
+                result.innerHTML = '<p class="result-err">يرجى إدخال الكود أولاً.</p>';
+                return;
+            }
+            const entry = data.codes.find(c => c.code === code);
+            if (!entry) {
+                result.innerHTML = '<p class="result-err">الكود غير صحيح أو غير موجود.</p>';
+                return;
+            }
+            if (entry.uses <= 0) {
+                result.innerHTML = '<p class="result-err">تم استنفاد هذا الكود بالكامل.</p>';
+                return;
+            }
+            const script = data.scripts.find(s => s.id === entry.scriptId);
+            if (!script) {
+                result.innerHTML = '<p class="result-err">السكربت المرتبط بهذا الكود غير موجود.</p>';
+                return;
+            }
+            entry.uses -= 1;
+            entry.redeemed = (entry.redeemed || 0) + 1;
+            saveData();
+
+            result.innerHTML = `
+                <p class="result-ok">تم استلام السكربت بنجاح! المتبقي من الكود: ${entry.uses}.</p>
+                <div class="script-card">
+                    <h4>${escapeHtml(script.name)}</h4>
+                    ${script.img ? `<img src="${escapeHtml(script.img)}" alt="${escapeHtml(script.name)}" onerror="this.style.display='none'">` : ''}
+                    <pre>${escapeHtml(script.code)}</pre>
+                </div>
+            `;
+            input.value = '';
+            renderCodes();
+            showToast('تم استلام السكربت', 'success');
+        }
+
+        // ---------- Admin ----------
+        function checkAdminLogin() {
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === ADMIN_PASSWORD) {
+                document.getElementById('login-error').style.display = 'none';
+                showSection('admin-panel');
+                renderAdminSelect();
+                renderCodes();
+                renderLibrary();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('admin-pass').value = '';
+            showSection('home');
+        }
+
+        function renderAdminSelect() {
+            const sel = document.getElementById('linked-script');
+            sel.innerHTML = data.scripts.length
+                ? data.scripts.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`).join('')
+                : '<option value="">— لا توجد سكربتات —</option>';
+        }
+
+        function addScript() {
+            const name = document.getElementById('script-name').value.trim();
+            const img = document.getElementById('script-img').value.trim();
+            const code = document.getElementById('script-code').value;
+            if (!name || !code) {
+                showToast('يرجى إدخال الاسم وكود السكربت.', 'error');
+                return;
+            }
+            data.scripts.push({ id: 's_' + Date.now(), name, img, code });
+            saveData();
+            renderLibrary();
+            renderAdminSelect();
+            document.getElementById('script-name').value = '';
+            document.getElementById('script-img').value = '';
+            document.getElementById('script-code').value = '';
+            showToast('تمت إضافة السكربت', 'success');
+        }
+
+        function addCode() {
+            const code = document.getElementById('new-code').value.trim();
+            const uses = parseInt(document.getElementById('code-uses').value, 10);
+            const scriptId = document.getElementById('linked-script').value;
+            if (!code) { showToast('يرجى إدخال الكود.', 'error'); return; }
+            if (isNaN(uses) || uses < 1) { showToast('عدد الاستخدامات يجب أن يكون 1 على الأقل.', 'error'); return; }
+            if (data.codes.some(c => c.code === code)) { showToast('هذا الكود موجود مسبقًا.', 'error'); return; }
+            if (!scriptId) { showToast('أضف سكربتًا أولًا ثم اربط الكود به.', 'error'); return; }
+            data.codes.push({ code, uses, scriptId, redeemed: 0 });
+            saveData();
+            renderCodes();
+            document.getElementById('new-code').value = '';
+            document.getElementById('code-uses').value = '1';
+            showToast('تمت إضافة الكود', 'success');
+        }
+
+        function renderCodes() {
+            const box = document.getElementById('codes-display');
+            if (!box) return;
+            if (!data.codes.length) {
+                box.className = 'empty';
+                box.innerHTML = 'لا توجد أكواد بعد.';
+                return;
+            }
+            box.className = '';
+            box.innerHTML = data.codes.map((c, i) => {
+                const script = data.scripts.find(s => s.id === c.scriptId);
+                return `
+                    <div class="script-card">
+                        <span class="code-badge">${escapeHtml(c.code)}</span>
+                        <div class="meta-row">السكربت: ${script ? escapeHtml(script.name) : 'محذوف'}</div>
+                        <div class="meta-row">المتبقي: <b>${c.uses}</b> • المستخدم: <b>${c.redeemed || 0}</b></div>
+                        <button class="btn btn-danger btn-full" style="margin-top:10px;padding:10px;font-size:0.88rem;" onclick="deleteCode(${i})">حذف الكود</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteCode(index) {
+            const entry = data.codes[index];
+            if (!entry) return;
+            data.codes.splice(index, 1);
+            saveData();
+            renderCodes();
+            showToast('تم حذف الكود', 'success');
+        }
+
+        // ---------- Init ----------
+        renderLibrary();
+        document.getElementById('user-code').addEventListener('keydown', e => {
+            if (e.key === 'Enter') redeemCode();
+        });
+        document.getElementById('admin-pass').addEventListener('keydown', e => {
+            if (e.key === 'Enter') checkAdminLogin();
+        });
+    </script>
+</body>
+</html>
