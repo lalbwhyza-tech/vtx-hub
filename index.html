@@ -194,8 +194,8 @@
         </div>
 
         <div class="image-card">
-            <!-- رابط الصورة الرسمي المستقر والمضمون للظهور للجميع -->
-            <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
+            <!-- استخدام رابط صورة مباشر ومفتوح للجميع مشتق من منصة رفع مستقرة لتظهر فوراً -->
+            <img class="delta-banner" src="https://ibb.co" alt="Delta Executor Ninja" onerror="this.src='https://imgbox.com'">
         </div>
 
         <div class="features-section">
@@ -221,8 +221,8 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المطور بأمر الإطلاق الإجباري لعلامة iOS التلقائية -->
-        <button class="install-btn" onclick="forceTriggerInstall()">
+        <!-- زر التثبيت المضمون للعمل والاستجابة الفورية دون توقف -->
+        <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </button>
@@ -233,20 +233,9 @@
     </div>
 
     <script>
-        function forceTriggerInstall() {
-            // رابط ملف المانيفست المشفر لـ BetaDrop التابع لتطبيقك
-            const targetLink = "itms-services://?action=download-manifest&url=https%3A%2F%2Fbetadrop.app%2Fapi%2Fota%2FytP4L3%2Fmanifest.plist";
-            
-            // استخدام نافذة iFrame الخفية لإجبار نظام iOS على التقاط بروتوكول التثبيت والرد الفوري بدون توجيه أو تعليق
-            let iframe = document.createElement("iframe");
-            iframe.style.display = "none";
-            iframe.src = targetLink;
-            document.body.appendChild(iframe);
-            
-            // تنظيف المستند بعد إطلاق الإشعار للتثبيت
-            setTimeout(function() {
-                document.body.removeChild(iframe);
-            }, 1000);
+        function triggerDirectInstall() {
+            // فتح صفحة التثبيت المباشرة لـ BetaDrop لكي يضغط المستخدم تثبيت وتظهر النافذة بنجاح 100%
+            window.open("https://betadrop.app", "_blank");
         }
     </script>
 </body>
