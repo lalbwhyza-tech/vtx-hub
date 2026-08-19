@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHD HUB — DELTA App</title>
+    <title>SHD HUB — منصة هاكات وتطبيقات الآيفون</title>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #1a0007, #3d0011);
-            --bg-solid: #1a0007;
+            --bg-gradient: linear-gradient(135deg, #150005, #2d000c);
+            --bg-solid: #150005;
             --card-bg: rgba(255, 255, 255, 0.04);
             --card-bg-hover: rgba(255, 255, 255, 0.07);
             --card-border: rgba(255, 255, 255, 0.08);
             --raised-bg: rgba(255, 255, 255, 0.06);
-            --accent-red: #cc0033;
-            --accent-hover: #ff1a53;
-            --accent-soft: rgba(204, 0, 51, 0.15);
+            --accent-red: #dd0035;
+            --accent-hover: #ff1a55;
+            --accent-soft: rgba(221, 0, 53, 0.15);
             --gold: #ffb703;
             --danger-color: #ff4757;
             --success-color: #2ed573;
             --online: #00ff66;
             --text-color: #ffffff;
-            --text-muted: #aaaaaa;
-            --text-faint: #7a7a7a;
+            --text-muted: #cccccc;
+            --text-faint: #888888;
         }
 
         * { box-sizing: border-box; }
@@ -32,7 +32,7 @@
             background-attachment: fixed;
             color: var(--text-color);
             margin: 0;
-            padding: 20px 16px 60px 16px;
+            padding: 20px 16px 80px 16px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -47,39 +47,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 22px;
+            margin-bottom: 25px;
         }
-        .brand-mark {
-            display: flex; align-items: center; gap: 8px;
-            font-weight: 800; letter-spacing: 1px; font-size: 0.95rem;
-            color: var(--text-muted);
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-mark {
+            width: 38px; height: 38px;
+            background: linear-gradient(145deg, var(--accent-red), #8a0022);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 14px rgba(221,0,53,0.4);
         }
-        .brand-mark .dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            background: var(--accent-red); box-shadow: 0 0 8px var(--accent-red);
+        .logo-mark svg { width: 22px; height: 22px; color: #fff; }
+        .logo-text {
+            font-size: 1.4rem; font-weight: 900;
+            color: var(--accent-red); letter-spacing: 1px;
         }
         .menu-btn {
-            background: var(--accent-red);
-            border: none;
-            border-radius: 14px;
-            width: 46px; height: 46px;
-            display: flex; align-items: center; justify-content: center;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(204, 0, 51, 0.35);
-            transition: transform 0.15s, background-color 0.2s;
+            font-weight: bold;
+            font-size: 0.85rem;
+            font-family: inherit;
+            display: flex; align-items: center; gap: 8px;
+            transition: background-color 0.2s, border-color 0.2s;
         }
-        .menu-btn:hover { background: var(--accent-hover); }
-        .menu-btn:active { transform: scale(0.94); }
-        .menu-btn .bars {
-            display: flex; flex-direction: column; gap: 5px;
-        }
-        .menu-btn .bars span {
-            display: block; width: 20px; height: 2px;
-            background: #fff; border-radius: 2px; transition: transform 0.25s, opacity 0.25s;
-        }
-        .menu-btn.open .bars span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-btn:hover { background: var(--card-bg-hover); border-color: var(--accent-red); }
+        .menu-btn svg { width: 18px; height: 18px; }
+        .menu-btn .bars { display: flex; flex-direction: column; gap: 4px; }
+        .menu-btn .bars span { display: block; width: 18px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
+        .menu-btn.open .bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
         .menu-btn.open .bars span:nth-child(2) { opacity: 0; }
-        .menu-btn.open .bars span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .menu-btn.open .bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
         /* ===== Menu panel ===== */
         .menu-panel {
@@ -88,19 +90,17 @@
             border: 1px solid var(--card-border);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 8px;
-            margin-bottom: 22px;
+            margin-bottom: 25px;
             max-height: 0; overflow: hidden; opacity: 0;
             transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
         }
-        .menu-panel.open {
-            max-height: 320px; opacity: 1; padding: 8px;
-        }
+        .menu-panel.open { max-height: 340px; opacity: 1; padding: 8px; }
         .menu-panel button {
             width: 100%; text-align: right;
             background: transparent; border: none; color: var(--text-color);
-            padding: 14px 16px; border-radius: 12px; cursor: pointer;
+            padding: 14px 16px; border-radius: 10px; cursor: pointer;
             font-family: inherit; font-size: 1rem; font-weight: 600;
             display: flex; align-items: center; gap: 12px;
             transition: background-color 0.2s;
@@ -110,7 +110,7 @@
         .menu-panel button svg { width: 20px; height: 20px; flex-shrink: 0; }
 
         /* ===== Container ===== */
-        .app-container {
+        .main-container {
             width: 100%; max-width: 480px; text-align: center;
         }
         .section { display: none; animation: fadeUp 0.3s ease; }
@@ -120,15 +120,28 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== Hero ===== */
+        /* ===== Welcome card ===== */
+        .welcome-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            text-align: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .welcome-card h2 { margin: 0 0 8px 0; color: #fff; font-size: 1.6rem; font-weight: 800; }
+        .welcome-card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
         .status-badge {
             background: var(--accent-soft);
             border: 1px solid var(--accent-red);
             color: #ff5577;
-            padding: 7px 16px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: bold;
+            padding: 6px 16px; border-radius: 20px;
+            font-size: 0.82rem; font-weight: bold;
             display: inline-flex; align-items: center; gap: 8px;
-            margin-bottom: 22px;
+            margin-bottom: 16px;
         }
         .status-badge::before {
             content: ''; width: 8px; height: 8px;
@@ -138,86 +151,87 @@
         }
         @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .app-icon {
-            width: 92px; height: 92px;
-            background: linear-gradient(145deg, #cc0033, #7a0020);
-            border-radius: 22px;
-            margin: 0 auto 16px auto;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 12px 30px rgba(204, 0, 51, 0.4);
-            position: relative; overflow: hidden;
+        /* ===== Section title ===== */
+        .section-title {
+            text-align: right;
+            font-size: 1.2rem;
+            margin: 22px 0 14px 0;
+            color: #fff;
+            font-weight: 700;
+            border-right: 4px solid var(--accent-red);
+            padding-right: 12px;
         }
-        .app-icon::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(160deg, rgba(255,255,255,0.18), transparent 55%);
-        }
-        .app-icon svg { width: 46px; height: 46px; color: #fff; z-index: 1; }
 
-        .app-title-area {
-            display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px;
+        /* ===== Hack list ===== */
+        .hack-list {
+            display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;
         }
-        .app-title { font-size: 2rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
-        .version-badge {
-            background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 8px;
-            font-size: 0.72rem; font-weight: bold; color: var(--text-muted);
+        .hack-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex; align-items: center; justify-content: space-between;
+            text-align: right;
+            transition: border-color 0.25s, transform 0.15s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
-        .hero-sub { color: var(--text-muted); font-size: 0.95rem; margin: 0 auto 18px auto; max-width: 340px; }
-
-        .rating-row {
-            display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 26px;
-        }
-        .stars { display: flex; gap: 3px; }
-        .stars svg { width: 18px; height: 18px; color: var(--gold); }
-        .stars svg.empty { color: rgba(255,255,255,0.18); }
-        .rating-text { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* ===== Feature cards ===== */
-        .features-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 26px;
-        }
-        .feature-card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 14px; padding: 18px 14px; text-align: center;
-            transition: transform 0.15s, background-color 0.2s;
-        }
-        .feature-card:active { transform: scale(0.97); }
-        .feature-card .ficon {
-            width: 44px; height: 44px; margin: 0 auto 10px auto;
+        .hack-card:hover { border-color: rgba(221, 0, 53, 0.4); transform: translateY(-2px); }
+        .hack-card:active { transform: scale(0.98); }
+        .hack-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+        .hack-icon {
+            width: 48px; height: 48px;
             background: var(--accent-soft); border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
         }
-        .feature-card .ficon svg { width: 22px; height: 22px; color: var(--accent-hover); }
-        .feature-card h4 { margin: 0 0 4px 0; font-size: 0.92rem; font-weight: 700; }
-        .feature-card p { margin: 0; font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; }
-
-        /* ===== Primary action ===== */
-        .hero-actions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
-        .btn {
-            border: none; cursor: pointer; font-family: inherit; font-weight: bold;
-            border-radius: 14px; padding: 14px 20px; font-size: 1rem;
-            transition: transform 0.15s, background-color 0.2s, opacity 0.2s;
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        .hack-icon svg { width: 24px; height: 24px; color: var(--accent-hover); }
+        .hack-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+        .hack-name { font-size: 1.05rem; font-weight: bold; color: #fff; }
+        .hack-meta { font-size: 0.78rem; color: var(--text-muted); display: flex; gap: 10px; flex-wrap: wrap; }
+        .badge-status { color: var(--online); font-weight: bold; }
+        .badge-status.offline { color: var(--text-faint); }
+        .badge-version {
+            background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 6px;
+            font-size: 0.72rem; font-weight: bold; color: var(--text-muted);
         }
-        .btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--accent-red); color: #fff; box-shadow: 0 8px 22px rgba(204,0,51,0.35); }
-        .btn-primary:hover { background: var(--accent-hover); }
-        .btn-ghost { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); }
-        .btn-ghost:hover { background: var(--card-bg-hover); }
-        .btn-danger { background: var(--danger-color); color: #fff; }
-        .btn-danger:hover { opacity: 0.88; }
-        .btn-full { width: 100%; }
-        .btn svg { width: 20px; height: 20px; }
+        .download-action-btn {
+            background: var(--accent-red); color: #fff; border: none;
+            padding: 10px 18px; border-radius: 10px;
+            font-weight: bold; font-size: 0.88rem; cursor: pointer;
+            font-family: inherit; transition: background-color 0.2s, transform 0.15s;
+            display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+        }
+        .download-action-btn:hover { background: var(--accent-hover); }
+        .download-action-btn:active { transform: scale(0.95); }
+        .download-action-btn svg { width: 18px; height: 18px; }
+        .download-action-btn.disabled { background: rgba(255,255,255,0.08); color: var(--text-faint); cursor: not-allowed; }
+        .download-action-btn.disabled:hover { background: rgba(255,255,255,0.08); }
 
-        /* ===== Cards / panels ===== */
+        /* ===== Search ===== */
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--card-border); border-radius: 12px;
+            background: rgba(0,0,0,0.25); color: var(--text-color);
+            font-family: inherit; font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .search-box::placeholder { color: var(--text-faint); }
+        .search-box:focus { outline: none; border-color: var(--accent-red); }
+
+        /* ===== Admin panel ===== */
         .panel {
             background: var(--card-bg); border: 1px solid var(--card-border);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border-radius: 16px; padding: 22px; text-align: right; margin-bottom: 18px;
         }
-        .panel h2 { margin: 0 0 6px 0; font-size: 1.3rem; font-weight: 800; }
+        .panel h2 { margin: 0 0 6px 0; font-size: 1.3rem; font-weight: 800; color: var(--accent-hover); }
         .panel .panel-sub { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 18px 0; }
         .panel hr { border: none; border-top: 1px solid var(--card-border); margin: 20px 0; }
         .panel h3 { margin: 0 0 8px 0; font-size: 1.05rem; font-weight: 700; }
+        .admin-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 
         label { display: block; margin: 12px 0 4px 0; color: var(--text-muted); font-size: 0.85rem; }
         input, textarea, select {
@@ -228,35 +242,25 @@
         }
         input::placeholder, textarea::placeholder { color: var(--text-faint); }
         input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-red); }
-
         .field-row { display: flex; gap: 10px; }
         .field-row > div { flex: 1; }
 
-        /* ===== Script card ===== */
-        .script-card {
-            background: var(--raised-bg); border: 1px solid var(--card-border);
-            border-radius: 14px; padding: 16px; margin-top: 14px; text-align: right;
+        /* ===== Buttons ===== */
+        .btn {
+            border: none; cursor: pointer; font-family: inherit; font-weight: bold;
+            border-radius: 12px; padding: 14px 20px; font-size: 1rem;
+            transition: transform 0.15s, background-color 0.2s, opacity 0.2s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .script-card h4 { margin: 0 0 10px 0; color: var(--accent-hover); font-size: 1rem; }
-        .script-card img {
-            max-width: 100%; max-height: 200px; object-fit: cover;
-            border-radius: 10px; margin-bottom: 10px; display: block;
-        }
-        .script-card pre {
-            background: rgba(0,0,0,0.4); padding: 13px; border-radius: 10px;
-            overflow-x: auto; white-space: pre-wrap; word-break: break-all;
-            margin: 8px 0 0 0; font-size: 0.83rem; direction: ltr; text-align: left;
-        }
-
-        /* ===== Code badge / meta ===== */
-        .code-badge {
-            display: inline-block; background: rgba(0,0,0,0.3);
-            border: 1px dashed var(--card-border);
-            padding: 4px 10px; border-radius: 8px;
-            font-family: monospace; font-size: 0.88rem; margin: 2px;
-        }
-        .meta-row { color: var(--text-muted); font-size: 0.82rem; margin: 6px 0; }
-        .meta-row b { color: var(--text-color); }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary { background: var(--accent-red); color: #fff; box-shadow: 0 6px 18px rgba(221,0,53,0.3); }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-ghost { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); }
+        .btn-ghost:hover { background: var(--card-bg-hover); }
+        .btn-danger { background: var(--danger-color); color: #fff; }
+        .btn-danger:hover { opacity: 0.88; }
+        .btn-full { width: 100%; }
+        .btn svg { width: 20px; height: 20px; }
 
         /* ===== Empty & note ===== */
         .empty {
@@ -273,7 +277,7 @@
         /* ===== Toast ===== */
         .toast {
             position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
-            background: rgba(26,0,7,0.95); border: 1px solid var(--accent-red); color: var(--text-color);
+            background: rgba(21,0,5,0.95); border: 1px solid var(--accent-red); color: var(--text-color);
             padding: 13px 24px; border-radius: 14px; z-index: 1000;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none;
@@ -283,16 +287,37 @@
         .toast.error { border-color: var(--danger-color); }
         .toast.success { border-color: var(--success-color); }
 
-        /* ===== Tabs inside admin ===== */
-        .admin-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+        /* ===== Modal ===== */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            display: none; align-items: center; justify-content: center;
+            z-index: 2000; padding: 20px;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+        .modal-overlay.show { display: flex; animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal {
+            background: var(--bg-solid); border: 1px solid var(--card-border);
+            border-radius: 18px; padding: 24px; max-width: 380px; width: 100%;
+            text-align: right; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .modal h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: var(--accent-hover); }
+        .modal p { color: var(--text-muted); font-size: 0.9rem; margin: 0 0 18px 0; }
+        .modal .btn { margin-top: 6px; }
     </style>
 </head>
 <body>
 
     <div class="top-bar">
-        <div class="brand-mark"><span class="dot"></span> SHD</div>
+        <div class="logo-area">
+            <div class="logo-mark">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/></svg>
+            </div>
+            <span class="logo-text">SHD HUB</span>
+        </div>
         <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">
             <div class="bars"><span></span><span></span><span></span></div>
+            <span>القائمة</span>
         </button>
     </div>
 
@@ -301,11 +326,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
             الرئيسية
         </button>
-        <button data-section="library">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            مكتبة السكربتات
+        <button data-section="hacks">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            الهاكات والتطبيقات
         </button>
-        <button data-section="receive">
+        <button data-section="redeem">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
             استلام كود
         </button>
@@ -315,85 +340,38 @@
         </button>
     </div>
 
-    <div class="app-container">
+    <div class="main-container">
 
         <!-- ===== HOME ===== -->
         <div id="home" class="section active">
-            <div class="status-badge">المنصة متاحة الآن</div>
-
-            <div class="app-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <div class="welcome-card">
+                <div class="status-badge">المنصة متاحة الآن</div>
+                <h2>SHD HUB</h2>
+                <p>منصة هاكات وتطبيقات الآيفون — تصفّح أحدث الهاكات والتطبيقات المعدّلة، واستلمها بكود مخصص.</p>
             </div>
-
-            <div class="app-title-area">
-                <h1 class="app-title">SHD HUB</h1>
-                <span class="version-badge">DELTA v2.0</span>
-            </div>
-            <p class="hero-sub">منصة إدارة وتوزيع السكربتات والأكواد. استلم سكربتك بكود مخصص، وتابع مكتبتك في مكان واحد.</p>
-
-            <div class="rating-row">
-                <div class="stars" aria-label="تقييم 4.8 من 5">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-                    <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>
-                </div>
-                <span class="rating-text">4.8 — منصة موثوقة</span>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-                    <h4>أكواد مخصصة</h4>
-                    <p>وزّع سكربتات بأكواد مرنة تحدد عدد مرات الاستخدام.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-                    <h4>مكتبة منظمة</h4>
-                    <p>كل السكربتات في مكتبة واحدة مع صور وأكواد.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/></svg></div>
-                    <h4>لوحة إدارة</h4>
-                    <p>أضف السكربتات والأكواد وتابع الاستخدام منها.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                    <h4>حماية محلية</h4>
-                    <p>بياناتك تبقى على جهازك، بدون خادم خارجي.</p>
-                </div>
-            </div>
-
-            <div class="hero-actions">
-                <button class="btn btn-primary btn-full" onclick="showSection('receive')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
-                    استلام كود
-                </button>
-                <button class="btn btn-ghost btn-full" onclick="showSection('library')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    تصفّح المكتبة
-                </button>
-            </div>
+            <div class="section-title">أحدث الإضافات</div>
+            <div class="hack-list" id="home-hacks"></div>
+            <button class="btn btn-ghost btn-full" onclick="showSection('hacks')">
+                عرض كل الهاكات
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
         </div>
 
-        <!-- ===== LIBRARY ===== -->
-        <div id="library" class="section">
-            <div class="panel">
-                <h2>مكتبة السكربتات</h2>
-                <p class="panel-sub">كل السكربتات المضافة حتى الآن.</p>
-                <div id="scripts-display" class="empty">لا توجد سكربتات مضافة حاليًا.</div>
-            </div>
+        <!-- ===== HACKS ===== -->
+        <div id="hacks" class="section">
+            <div class="section-title">الهاكات والتطبيقات</div>
+            <input type="text" class="search-box" id="hackSearch" placeholder="ابحث عن هاك أو تطبيق...">
+            <div class="hack-list" id="hacks-display"></div>
         </div>
 
-        <!-- ===== RECEIVE ===== -->
-        <div id="receive" class="section">
+        <!-- ===== REDEEM ===== -->
+        <div id="redeem" class="section">
             <div class="panel">
-                <h2>استلام كود السكربت</h2>
-                <p class="panel-sub">أدخل الكود الذي حصلت عليه لاستلام السكربت المخصص لك.</p>
+                <h2>استلام كود</h2>
+                <p class="panel-sub">أدخل الكود الذي حصلت عليه لاستلام الهاك أو التطبيق المخصص لك.</p>
                 <label for="user-code">الكود</label>
                 <input type="text" id="user-code" placeholder="مثال: SHD-2024-001" autocomplete="off">
-                <button class="btn btn-primary btn-full" onclick="redeemCode()">استلام السكربت</button>
+                <button class="btn btn-primary btn-full" onclick="redeemCode()">استلام</button>
                 <div id="redeem-result"></div>
             </div>
         </div>
@@ -414,19 +392,33 @@
         <div id="admin-panel" class="section">
             <div class="panel">
                 <div class="admin-head">
-                    <h2>لوحة تحكم الإدارة</h2>
+                    <h2>لوحة الإدارة</h2>
                     <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem;" onclick="adminLogout()">خروج</button>
                 </div>
-                <p class="panel-sub">أضف السكربتات والأكواد وتابع الاستخدام.</p>
+                <p class="panel-sub">أضف الهاكات والتطبيقات، وأنشئ أكواد الاستلام وتابعها.</p>
 
-                <h3>إضافة سكربت جديد</h3>
-                <label for="script-name">اسم السكربت</label>
-                <input type="text" id="script-name" placeholder="مثال: سكربت الرسم السريع">
-                <label for="script-img">رابط الصورة (اختياري)</label>
-                <input type="text" id="script-img" placeholder="https://...">
-                <label for="script-code">كود السكربت البرمجي</label>
-                <textarea id="script-code" placeholder="الصق الكود هنا" rows="5"></textarea>
-                <button class="btn btn-primary btn-full" onclick="addScript()">إدراج السكربت</button>
+                <h3>إضافة هاك / تطبيق</h3>
+                <div class="field-row">
+                    <div>
+                        <label for="hack-name">الاسم</label>
+                        <input type="text" id="hack-name" placeholder="مثال: Spotify++">
+                    </div>
+                    <div>
+                        <label for="hack-version">الإصدار</label>
+                        <input type="text" id="hack-version" placeholder="v2.1">
+                    </div>
+                </div>
+                <label for="hack-category">التصنيف</label>
+                <select id="hack-category">
+                    <option value="هاك">هاك</option>
+                    <option value="تطبيق">تطبيق</option>
+                    <option value="تعديل">تعديل (Mod)</option>
+                </select>
+                <label for="hack-download">رابط التحميل</label>
+                <input type="text" id="hack-download" placeholder="https://...">
+                <label for="hack-icon">رابط الأيقونة (اختياري)</label>
+                <input type="text" id="hack-icon" placeholder="https://...">
+                <button class="btn btn-primary btn-full" onclick="addHack()">إضافة</button>
 
                 <hr>
 
@@ -441,9 +433,14 @@
                         <input type="number" id="code-uses" placeholder="1" value="1" min="1">
                     </div>
                 </div>
-                <label for="linked-script">السكربت المرتبط</label>
-                <select id="linked-script"></select>
+                <label for="linked-hack">الهاك المرتبط</label>
+                <select id="linked-hack"></select>
                 <button class="btn btn-primary btn-full" onclick="addCode()">إضافة الكود</button>
+
+                <hr>
+
+                <h3>الهاكات المضافة</h3>
+                <div id="admin-hacks-display" class="empty">لا توجد هاكات بعد.</div>
 
                 <hr>
 
@@ -456,18 +453,37 @@
 
     <div id="toast" class="toast"></div>
 
+    <div class="modal-overlay" id="downloadModal">
+        <div class="modal">
+            <h3 id="modal-title">جاري التحميل</h3>
+            <p id="modal-desc"></p>
+            <a id="modal-link" href="#" class="btn btn-primary btn-full" target="_blank" rel="noopener">فتح رابط التحميل</a>
+            <button class="btn btn-ghost btn-full" style="margin-top:8px;" onclick="closeModal()">إغلاق</button>
+        </div>
+    </div>
+
     <script>
         const ADMIN_PASSWORD = '1234';
-        const STORAGE_KEY = 'shd_data';
+        const STORAGE_KEY = 'shd_hacks_data';
 
-        let data = { scripts: [], codes: [] };
+        let data = { hacks: [], codes: [] };
         try {
             const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
-            if (stored && Array.isArray(stored.scripts) && Array.isArray(stored.codes)) {
+            if (stored && Array.isArray(stored.hacks) && Array.isArray(stored.codes)) {
                 data = stored;
             }
         } catch (e) {
-            data = { scripts: [], codes: [] };
+            data = { hacks: [], codes: [] };
+        }
+
+        // Seed sample data on first run
+        if (data.hacks.length === 0 && data.codes.length === 0) {
+            data.hacks = [
+                { id: 'h_1', name: 'Spotify++', version: 'v8.9', category: 'تعديل', download: '', icon: '', active: true },
+                { id: 'h_2', name: 'YouTube Ad-Free', version: 'v19.2', category: 'هاك', download: '', icon: '', active: true },
+                { id: 'h_3', name: 'Instagram Pro', version: 'v310', category: 'تطبيق', download: '', icon: '', active: true }
+            ];
+            saveData();
         }
 
         function saveData() {
@@ -522,23 +538,83 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // ---------- Library ----------
-        function renderLibrary() {
-            const box = document.getElementById('scripts-display');
-            if (!data.scripts.length) {
-                box.className = 'empty';
-                box.innerHTML = 'لا توجد سكربتات مضافة حاليًا.';
+        // ---------- Hack icons by category ----------
+        function hackIcon(category) {
+            if (category === 'هاك') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2l-2 2-2-2M14 22l-2-2-2 2M2 12l2-2-2-2M22 12l-2-2 2-2"/><circle cx="12" cy="12" r="4"/></svg>';
+            if (category === 'تطبيق') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>';
+            return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>';
+        }
+
+        // ---------- Render hacks ----------
+        function renderHacks(containerId, hacks) {
+            const box = document.getElementById(containerId);
+            if (!box) return;
+            if (!hacks.length) {
+                box.className = 'hack-list';
+                box.innerHTML = '<div class="empty">لا توجد هاكات أو تطبيقات حاليًا.</div>';
                 return;
             }
-            box.className = '';
-            box.innerHTML = data.scripts.map(s => `
-                <div class="script-card">
-                    <h4>${escapeHtml(s.name)}</h4>
-                    ${s.img ? `<img src="${escapeHtml(s.img)}" alt="${escapeHtml(s.name)}" onerror="this.style.display='none'">` : ''}
-                    <pre>${escapeHtml(s.code)}</pre>
+            box.className = 'hack-list';
+            box.innerHTML = hacks.map(h => `
+                <div class="hack-card">
+                    <div class="hack-info">
+                        <div class="hack-icon">${hackIcon(h.category)}</div>
+                        <div class="hack-text">
+                            <div class="hack-name">${escapeHtml(h.name)}</div>
+                            <div class="hack-meta">
+                                <span class="badge-version">${escapeHtml(h.version || 'v1.0')}</span>
+                                <span>${escapeHtml(h.category || 'هاك')}</span>
+                                <span class="badge-status ${h.active ? '' : 'offline'}">${h.active ? 'متاح' : 'معطّل'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="download-action-btn ${h.active ? '' : 'disabled'}" ${h.active ? '' : 'disabled'} onclick="openDownload('${escapeHtml(h.id)}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        تحميل
+                    </button>
                 </div>
             `).join('');
         }
+
+        function renderHomeHacks() {
+            const recent = data.hacks.slice(-4).reverse();
+            renderHacks('home-hacks', recent);
+        }
+
+        function renderAllHacks() {
+            const search = (document.getElementById('hackSearch')?.value || '').toLowerCase().trim();
+            const filtered = search
+                ? data.hacks.filter(h => h.name.toLowerCase().includes(search) || (h.category || '').toLowerCase().includes(search))
+                : data.hacks;
+            renderHacks('hacks-display', filtered);
+        }
+
+        // ---------- Download modal ----------
+        function openDownload(id) {
+            const hack = data.hacks.find(h => h.id === id);
+            if (!hack || !hack.active) return;
+            if (hack.download) {
+                document.getElementById('modal-title').textContent = hack.name;
+                document.getElementById('modal-desc').textContent = 'سيتم فتح رابط التحميل في نافذة جديدة.';
+                document.getElementById('modal-link').href = hack.download;
+            } else {
+                document.getElementById('modal-title').textContent = hack.name;
+                document.getElementById('modal-desc').textContent = 'لم يتم إضافة رابط تحميل لهذا العنصر بعد. استخدم كود الاستلام للحصول عليه.';
+                document.getElementById('modal-link').href = '#';
+                document.getElementById('modal-link').onclick = (e) => { e.preventDefault(); showSection('redeem'); closeModal(); };
+            }
+            document.getElementById('downloadModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('downloadModal').classList.remove('show');
+        }
+        document.getElementById('downloadModal').addEventListener('click', e => {
+            if (e.target.id === 'downloadModal') closeModal();
+        });
+
+        // ---------- Search ----------
+        document.getElementById('hackSearch').addEventListener('input', renderAllHacks);
 
         // ---------- Redeem ----------
         function redeemCode() {
@@ -560,9 +636,9 @@
                 result.innerHTML = '<p class="result-err">تم استنفاد هذا الكود بالكامل.</p>';
                 return;
             }
-            const script = data.scripts.find(s => s.id === entry.scriptId);
-            if (!script) {
-                result.innerHTML = '<p class="result-err">السكربت المرتبط بهذا الكود غير موجود.</p>';
+            const hack = data.hacks.find(h => h.id === entry.hackId);
+            if (!hack) {
+                result.innerHTML = '<p class="result-err">العنصر المرتبط بهذا الكود غير موجود.</p>';
                 return;
             }
             entry.uses -= 1;
@@ -570,16 +646,24 @@
             saveData();
 
             result.innerHTML = `
-                <p class="result-ok">تم استلام السكربت بنجاح! المتبقي من الكود: ${entry.uses}.</p>
-                <div class="script-card">
-                    <h4>${escapeHtml(script.name)}</h4>
-                    ${script.img ? `<img src="${escapeHtml(script.img)}" alt="${escapeHtml(script.name)}" onerror="this.style.display='none'">` : ''}
-                    <pre>${escapeHtml(script.code)}</pre>
+                <p class="result-ok">تم استلام الكود بنجاح! المتبقي: ${entry.uses}.</p>
+                <div class="hack-card">
+                    <div class="hack-info">
+                        <div class="hack-icon">${hackIcon(hack.category)}</div>
+                        <div class="hack-text">
+                            <div class="hack-name">${escapeHtml(hack.name)}</div>
+                            <div class="hack-meta">
+                                <span class="badge-version">${escapeHtml(hack.version || 'v1.0')}</span>
+                                <span>${escapeHtml(hack.category || 'هاك')}</span>
+                            </div>
+                        </div>
+                    </div>
+                    ${hack.download ? `<a href="${escapeHtml(hack.download)}" target="_blank" rel="noopener" class="download-action-btn">تحميل</a>` : '<button class="download-action-btn disabled" disabled>لا يوجد رابط</button>'}
                 </div>
             `;
             input.value = '';
             renderCodes();
-            showToast('تم استلام السكربت', 'success');
+            showToast('تم استلام العنصر', 'success');
         }
 
         // ---------- Admin ----------
@@ -590,7 +674,7 @@
                 showSection('admin-panel');
                 renderAdminSelect();
                 renderCodes();
-                renderLibrary();
+                renderAdminHacks();
             } else {
                 document.getElementById('login-error').style.display = 'block';
             }
@@ -602,39 +686,96 @@
         }
 
         function renderAdminSelect() {
-            const sel = document.getElementById('linked-script');
-            sel.innerHTML = data.scripts.length
-                ? data.scripts.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`).join('')
-                : '<option value="">— لا توجد سكربتات —</option>';
+            const sel = document.getElementById('linked-hack');
+            sel.innerHTML = data.hacks.length
+                ? data.hacks.map(h => `<option value="${escapeHtml(h.id)}">${escapeHtml(h.name)}</option>`).join('')
+                : '<option value="">— لا توجد هاكات —</option>';
         }
 
-        function addScript() {
-            const name = document.getElementById('script-name').value.trim();
-            const img = document.getElementById('script-img').value.trim();
-            const code = document.getElementById('script-code').value;
-            if (!name || !code) {
-                showToast('يرجى إدخال الاسم وكود السكربت.', 'error');
+        function addHack() {
+            const name = document.getElementById('hack-name').value.trim();
+            const version = document.getElementById('hack-version').value.trim();
+            const category = document.getElementById('hack-category').value;
+            const download = document.getElementById('hack-download').value.trim();
+            const icon = document.getElementById('hack-icon').value.trim();
+            if (!name) { showToast('يرجى إدخال اسم الهاك أو التطبيق.', 'error'); return; }
+            data.hacks.push({ id: 'h_' + Date.now(), name, version: version || 'v1.0', category, download, icon, active: true });
+            saveData();
+            renderAllHacks();
+            renderHomeHacks();
+            renderAdminSelect();
+            renderAdminHacks();
+            document.getElementById('hack-name').value = '';
+            document.getElementById('hack-version').value = '';
+            document.getElementById('hack-download').value = '';
+            document.getElementById('hack-icon').value = '';
+            showToast('تمت إضافة العنصر', 'success');
+        }
+
+        function renderAdminHacks() {
+            const box = document.getElementById('admin-hacks-display');
+            if (!box) return;
+            if (!data.hacks.length) {
+                box.className = 'empty';
+                box.innerHTML = 'لا توجد هاكات بعد.';
                 return;
             }
-            data.scripts.push({ id: 's_' + Date.now(), name, img, code });
+            box.className = '';
+            box.innerHTML = data.hacks.map((h, i) => `
+                <div class="hack-card" style="margin-bottom:12px;">
+                    <div class="hack-info">
+                        <div class="hack-icon">${hackIcon(h.category)}</div>
+                        <div class="hack-text">
+                            <div class="hack-name">${escapeHtml(h.name)}</div>
+                            <div class="hack-meta">
+                                <span class="badge-version">${escapeHtml(h.version || 'v1.0')}</span>
+                                <span>${escapeHtml(h.category || 'هاك')}</span>
+                                <span class="badge-status ${h.active ? '' : 'offline'}">${h.active ? 'متاح' : 'معطّل'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex-shrink:0;">
+                        <button class="download-action-btn" style="background:var(--card-bg-hover);color:#fff;padding:8px 12px;font-size:0.8rem;" onclick="toggleHack(${i})">${h.active ? 'تعطيل' : 'تفعيل'}</button>
+                        <button class="download-action-btn disabled" style="background:var(--danger-color);color:#fff;" onclick="deleteHack(${i})">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleHack(index) {
+            const h = data.hacks[index];
+            if (!h) return;
+            h.active = !h.active;
             saveData();
-            renderLibrary();
+            renderAllHacks();
+            renderHomeHacks();
+            renderAdminHacks();
+            showToast(h.active ? 'تم تفعيل العنصر' : 'تم تعطيل العنصر', 'success');
+        }
+
+        function deleteHack(index) {
+            const h = data.hacks[index];
+            if (!h) return;
+            data.hacks.splice(index, 1);
+            data.codes = data.codes.filter(c => c.hackId !== h.id);
+            saveData();
+            renderAllHacks();
+            renderHomeHacks();
             renderAdminSelect();
-            document.getElementById('script-name').value = '';
-            document.getElementById('script-img').value = '';
-            document.getElementById('script-code').value = '';
-            showToast('تمت إضافة السكربت', 'success');
+            renderAdminHacks();
+            renderCodes();
+            showToast('تم حذف العنصر', 'success');
         }
 
         function addCode() {
             const code = document.getElementById('new-code').value.trim();
             const uses = parseInt(document.getElementById('code-uses').value, 10);
-            const scriptId = document.getElementById('linked-script').value;
+            const hackId = document.getElementById('linked-hack').value;
             if (!code) { showToast('يرجى إدخال الكود.', 'error'); return; }
             if (isNaN(uses) || uses < 1) { showToast('عدد الاستخدامات يجب أن يكون 1 على الأقل.', 'error'); return; }
             if (data.codes.some(c => c.code === code)) { showToast('هذا الكود موجود مسبقًا.', 'error'); return; }
-            if (!scriptId) { showToast('أضف سكربتًا أولًا ثم اربط الكود به.', 'error'); return; }
-            data.codes.push({ code, uses, scriptId, redeemed: 0 });
+            if (!hackId) { showToast('أضف هاكًا أولًا ثم اربط الكود به.', 'error'); return; }
+            data.codes.push({ code, uses, hackId, redeemed: 0 });
             saveData();
             renderCodes();
             document.getElementById('new-code').value = '';
@@ -652,13 +793,21 @@
             }
             box.className = '';
             box.innerHTML = data.codes.map((c, i) => {
-                const script = data.scripts.find(s => s.id === c.scriptId);
+                const hack = data.hacks.find(h => h.id === c.hackId);
                 return `
-                    <div class="script-card">
-                        <span class="code-badge">${escapeHtml(c.code)}</span>
-                        <div class="meta-row">السكربت: ${script ? escapeHtml(script.name) : 'محذوف'}</div>
-                        <div class="meta-row">المتبقي: <b>${c.uses}</b> • المستخدم: <b>${c.redeemed || 0}</b></div>
-                        <button class="btn btn-danger btn-full" style="margin-top:10px;padding:10px;font-size:0.88rem;" onclick="deleteCode(${i})">حذف الكود</button>
+                    <div class="hack-card" style="margin-bottom:12px;">
+                        <div class="hack-info">
+                            <div class="hack-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+                            <div class="hack-text">
+                                <div class="hack-name" style="font-family:monospace;font-size:0.95rem;">${escapeHtml(c.code)}</div>
+                                <div class="hack-meta">
+                                    <span>${hack ? escapeHtml(hack.name) : 'محذوف'}</span>
+                                    <span>المتبقي: <b>${c.uses}</b></span>
+                                    <span>المستخدم: <b>${c.redeemed || 0}</b></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="download-action-btn disabled" style="background:var(--danger-color);color:#fff;" onclick="deleteCode(${i})">حذف</button>
                     </div>
                 `;
             }).join('');
@@ -674,7 +823,8 @@
         }
 
         // ---------- Init ----------
-        renderLibrary();
+        renderHomeHacks();
+        renderAllHacks();
         document.getElementById('user-code').addEventListener('keydown', e => {
             if (e.key === 'Enter') redeemCode();
         });
