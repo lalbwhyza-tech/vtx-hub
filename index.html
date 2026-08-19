@@ -6,10 +6,10 @@
     <title>SHD HUB — هاك دلتا للايفون</title>
     <style>
         :root {
-            --bg-color: #000b18; /* خلفية زرقاء داكنة جداً */
+            --bg-color: #000b18; 
             --card-bg: rgba(0, 20, 40, 0.6);
-            --neon-blue: #00bfff; /* لون أزرق مشع */
-            --neon-accent: #0077ff; /* لون أزرق متمم */
+            --neon-blue: #00bfff; 
+            --neon-accent: #0077ff; 
             --text-color: #ffffff;
         }
 
@@ -35,7 +35,6 @@
             padding: 0 10px;
         }
 
-        /* إعادة شعار SHD المضيء باللون الأزرق النيون */
         .brand-logo {
             font-size: 1.8rem;
             font-weight: 900;
@@ -132,7 +131,6 @@
             box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
         }
 
-        /* زر التثبيت الأزرق المطور */
         .install-btn {
             background: linear-gradient(135deg, #0055ff, #00bfff);
             color: #ffffff;
@@ -181,32 +179,10 @@
             font-size: 1rem;
             margin-bottom: 25px;
         }
-
-        .admin-trigger {
-            margin-top: 40px;
-            opacity: 0.2;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-        .admin-panel {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 191, 255, 0.2);
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 15px;
-            display: none;
-            text-align: right;
-        }
-        input {
-            width: 100%; padding: 10px; margin: 10px 0;
-            background: #000510; border: 1px solid rgba(0,191,255,0.3);
-            color: #fff; border-radius: 8px; box-sizing: border-box;
-        }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر المحدث بشعار SHD -->
     <div class="navbar">
         <div class="brand-logo">SHD</div>
         <div class="menu-icon">☰</div>
@@ -218,7 +194,6 @@
         </div>
 
         <div class="image-card">
-            <!-- كرت بانر دلتا نينجا التوضيحي -->
             <img class="delta-banner" src="https://imgbox.com" alt="Delta Executor Ninja">
         </div>
 
@@ -245,7 +220,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت الأزرق المطور مع بروتوكول فتح نافذة تنزيل نظام الـ iOS التلقائية -->
+        <!-- زر التثبيت المربوط مباشرة برابط ملفك من موقع BetaDrop -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -254,35 +229,12 @@
         <div>
             <div class="status-badge-failed">لا يعمل ✕</div>
         </div>
-
-        <div class="admin-trigger" onclick="toggleAdmin()">إعدادات رابط التثبيت المباشر</div>
-        <div id="admin-panel" class="admin-panel">
-            <p style="font-size: 0.85rem; color: var(--neon-blue);">ضع رابط ملف الـ plist الخاص بك بالأسفل وتلقائياً سيخرج أمر التثبيت التلقائي للعميل:</p>
-            <input type="text" id="plist-url" placeholder="مثال: https://delta.bz">
-            <button class="install-btn" style="padding:8px; font-size:1rem;" onclick="savePlistUrl()">حفظ وتحديث الرابط</button>
-        </div>
     </div>
 
     <script>
-        let storedPlistUrl = localStorage.getItem('rtx_plist_url') || 'https://delta.bz';
-
         function triggerDirectInstall() {
-            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(storedPlistUrl);
-        }
-
-        function toggleAdmin() {
-            const panel = document.getElementById('admin-panel');
-            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-            document.getElementById('plist-url').value = storedPlistUrl;
-        }
-
-        function savePlistUrl() {
-            const url = document.getElementById('plist-url').value.trim();
-            if(!url) return alert("https://betadrop.app/app/ytP4L3");
-            localStorage.setItem('rtx_plist_url', url);
-            storedPlistUrl = url;
-            alert("تم تحديث كود التثبيت المباشر للزر بنجاح!");
-            toggleAdmin();
+            // فتح رابط تطبيقك من BetaDrop مباشرة للتحميل
+            window.open("https://betadrop.app/app/ytP4L3", "_blank");
         }
     </script>
 </body>
