@@ -194,7 +194,8 @@
         </div>
 
         <div class="image-card">
-            <img class="delta-banner" src="https://imgbox.com" alt="Delta Executor Ninja">
+            <!-- رابط الصورة الرسمي المستقر والمضمون للظهور للجميع -->
+            <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
         </div>
 
         <div class="features-section">
@@ -220,8 +221,8 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت اللاسلكي الفوري للآيفون -->
-        <button class="install-btn" onclick="triggerDirectInstall()">
+        <!-- زر التثبيت المطور بأمر الإطلاق الإجباري لعلامة iOS التلقائية -->
+        <button class="install-btn" onclick="forceTriggerInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </button>
@@ -232,10 +233,20 @@
     </div>
 
     <script>
-        function triggerDirectInstall() {
-            // كود استدعاء بروتوكول أبل اللاسلكي لتنبثق نافذة (إلغاء / تثبيت) مباشرة
-            const plistUrl = "https://betadrop.app";
-            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
+        function forceTriggerInstall() {
+            // رابط ملف المانيفست المشفر لـ BetaDrop التابع لتطبيقك
+            const targetLink = "itms-services://?action=download-manifest&url=https%3A%2F%2Fbetadrop.app%2Fapi%2Fota%2FytP4L3%2Fmanifest.plist";
+            
+            // استخدام نافذة iFrame الخفية لإجبار نظام iOS على التقاط بروتوكول التثبيت والرد الفوري بدون توجيه أو تعليق
+            let iframe = document.createElement("iframe");
+            iframe.style.display = "none";
+            iframe.src = targetLink;
+            document.body.appendChild(iframe);
+            
+            // تنظيف المستند بعد إطلاق الإشعار للتثبيت
+            setTimeout(function() {
+                document.body.removeChild(iframe);
+            }, 1000);
         }
     </script>
 </body>
