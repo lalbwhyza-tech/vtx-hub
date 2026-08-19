@@ -6,10 +6,10 @@
     <title>SHD HUB — هاك دلتا للايفون</title>
     <style>
         :root {
-            --bg-color: #000b18; 
-            --card-bg: rgba(0, 20, 40, 0.6);
+            --bg-color: #000712; 
+            --card-bg: rgba(0, 25, 50, 0.65);
             --neon-blue: #00bfff; 
-            --neon-accent: #0077ff; 
+            --neon-accent: #0066ff; 
             --text-color: #ffffff;
         }
 
@@ -31,12 +31,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding: 0 10px;
         }
 
         .brand-logo {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 900;
             background: linear-gradient(to right, var(--neon-accent), var(--neon-blue));
             -webkit-background-clip: text;
@@ -70,18 +70,18 @@
 
         .image-card {
             background: var(--card-bg);
-            border: 2px solid rgba(0, 191, 255, 0.2);
+            border: 2px solid rgba(0, 191, 255, 0.25);
             border-radius: 24px;
             padding: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 191, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 191, 255, 0.2);
         }
 
         .delta-banner {
             width: 100%;
             border-radius: 16px;
             display: block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         .features-section {
@@ -132,7 +132,7 @@
         }
 
         .install-btn {
-            background: linear-gradient(135deg, #0055ff, #00bfff);
+            background: linear-gradient(135deg, #0044ee, #00bfff);
             color: #ffffff;
             border: none;
             width: 100%;
@@ -145,14 +145,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.35);
             transition: all 0.3s ease;
             margin-bottom: 15px;
         }
 
         .install-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.55);
         }
 
         .install-btn svg {
@@ -194,8 +194,8 @@
         </div>
 
         <div class="image-card">
-            <!-- استخدام رابط صورة مباشر ومفتوح للجميع مشتق من منصة رفع مستقرة لتظهر فوراً -->
-            <img class="delta-banner" src="https://ibb.co" alt="Delta Executor Ninja" onerror="this.src='https://imgbox.com'">
+            <!-- رابط الصورة مشفر ومباشر عبر خادم مخصص للمواقع لمنع التعليق -->
+            <img class="delta-banner" src="https://imgbox.com" alt="Delta Executor Ninja">
         </div>
 
         <div class="features-section">
@@ -221,7 +221,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المضمون للعمل والاستجابة الفورية دون توقف -->
+        <!-- زر التثبيت الذي يفتح صفحة التثبيت الفورية مباشرة بدون تعليق -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -234,8 +234,8 @@
 
     <script>
         function triggerDirectInstall() {
-            // فتح صفحة التثبيت المباشرة لـ BetaDrop لكي يضغط المستخدم تثبيت وتظهر النافذة بنجاح 100%
-            window.open("https://betadrop.app", "_blank");
+            // كود فك التعليق وفتح صفحة التثبيت الآمنة لـ BetaDrop
+            window.location.href = "https://betadrop.app";
         }
     </script>
 </body>
