@@ -7,40 +7,26 @@
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #150005, #2d000c);
-            --bg-solid: #150005;
-            --card-bg: rgba(255, 255, 255, 0.04);
-            --card-bg-hover: rgba(255, 255, 255, 0.07);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --raised-bg: rgba(255, 255, 255, 0.06);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.06);
             --accent-red: #dd0035;
             --accent-hover: #ff1a55;
-            --accent-soft: rgba(221, 0, 53, 0.15);
-            --gold: #ffb703;
-            --danger-color: #ff4757;
-            --success-color: #2ed573;
-            --online: #00ff66;
             --text-color: #ffffff;
             --text-muted: #cccccc;
-            --text-faint: #888888;
         }
-
-        * { box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg-gradient);
-            background-attachment: fixed;
             color: var(--text-color);
             margin: 0;
-            padding: 20px 16px 80px 16px;
+            padding: 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1.6;
         }
 
-        /* ===== Top bar ===== */
         .top-bar {
             width: 100%;
             max-width: 480px;
@@ -49,788 +35,246 @@
             align-items: center;
             margin-bottom: 25px;
         }
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-mark {
-            width: 38px; height: 38px;
-            background: linear-gradient(145deg, var(--accent-red), #8a0022);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 14px rgba(221,0,53,0.4);
-        }
-        .logo-mark svg { width: 22px; height: 22px; color: #fff; }
+
         .logo-text {
-            font-size: 1.4rem; font-weight: 900;
-            color: var(--accent-red); letter-spacing: 1px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            letter-spacing: 1px;
         }
+
         .menu-btn {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             color: #fff;
-            padding: 10px 16px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             font-size: 0.85rem;
-            font-family: inherit;
-            display: flex; align-items: center; gap: 8px;
-            transition: background-color 0.2s, border-color 0.2s;
         }
-        .menu-btn:hover { background: var(--card-bg-hover); border-color: var(--accent-red); }
-        .menu-btn svg { width: 18px; height: 18px; }
-        .menu-btn .bars { display: flex; flex-direction: column; gap: 4px; }
-        .menu-btn .bars span { display: block; width: 18px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
-        .menu-btn.open .bars span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-        .menu-btn.open .bars span:nth-child(2) { opacity: 0; }
-        .menu-btn.open .bars span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-        /* ===== Menu panel ===== */
-        .menu-panel {
-            width: 100%; max-width: 480px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-radius: 14px;
-            padding: 8px;
-            margin-bottom: 25px;
-            max-height: 0; overflow: hidden; opacity: 0;
-            transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
-        }
-        .menu-panel.open { max-height: 340px; opacity: 1; padding: 8px; }
-        .menu-panel button {
-            width: 100%; text-align: right;
-            background: transparent; border: none; color: var(--text-color);
-            padding: 14px 16px; border-radius: 10px; cursor: pointer;
-            font-family: inherit; font-size: 1rem; font-weight: 600;
-            display: flex; align-items: center; gap: 12px;
-            transition: background-color 0.2s;
-        }
-        .menu-panel button:hover { background: var(--card-bg-hover); }
-        .menu-panel button.active { background: var(--accent-soft); color: var(--accent-hover); }
-        .menu-panel button svg { width: 20px; height: 20px; flex-shrink: 0; }
-
-        /* ===== Container ===== */
         .main-container {
-            width: 100%; max-width: 480px; text-align: center;
-        }
-        .section { display: none; animation: fadeUp 0.3s ease; }
-        .section.active { display: block; }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
         }
 
-        /* ===== Welcome card ===== */
         .welcome-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 16px;
-            padding: 24px;
+            padding: 20px;
             margin-bottom: 25px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            text-align: center;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
         }
-        .welcome-card h2 { margin: 0 0 8px 0; color: #fff; font-size: 1.6rem; font-weight: 800; }
-        .welcome-card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
-        .status-badge {
-            background: var(--accent-soft);
-            border: 1px solid var(--accent-red);
-            color: #ff5577;
-            padding: 6px 16px; border-radius: 20px;
-            font-size: 0.82rem; font-weight: bold;
-            display: inline-flex; align-items: center; gap: 8px;
-            margin-bottom: 16px;
-        }
-        .status-badge::before {
-            content: ''; width: 8px; height: 8px;
-            background: var(--online); border-radius: 50%;
-            box-shadow: 0 0 8px var(--online);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* ===== Section title ===== */
+        .welcome-card h2 { margin: 0 0 8px 0; color: #fff; font-size: 1.6rem; }
+        .welcome-card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+
         .section-title {
             text-align: right;
             font-size: 1.2rem;
-            margin: 22px 0 14px 0;
+            margin: 20px 0 12px 0;
             color: #fff;
             font-weight: 700;
             border-right: 4px solid var(--accent-red);
-            padding-right: 12px;
+            padding-right: 10px;
         }
 
-        /* ===== Hack list ===== */
+        /* كروت الهاكات المتاحة */
         .hack-list {
-            display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
         }
+
         .hack-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 14px;
             padding: 16px;
-            display: flex; align-items: center; justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             text-align: right;
-            transition: border-color 0.25s, transform 0.15s;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            transition: 0.3s;
         }
-        .hack-card:hover { border-color: rgba(221, 0, 53, 0.4); transform: translateY(-2px); }
-        .hack-card:active { transform: scale(0.98); }
-        .hack-info { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
-        .hack-icon {
-            width: 48px; height: 48px;
-            background: var(--accent-soft); border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
+
+        .hack-card:hover {
+            border-color: rgba(221, 0, 53, 0.4);
+            transform: translateY(-2px);
         }
-        .hack-icon svg { width: 24px; height: 24px; color: var(--accent-hover); }
-        .hack-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-        .hack-name { font-size: 1.05rem; font-weight: bold; color: #fff; }
-        .hack-meta { font-size: 0.78rem; color: var(--text-muted); display: flex; gap: 10px; flex-wrap: wrap; }
-        .badge-status { color: var(--online); font-weight: bold; }
-        .badge-status.offline { color: var(--text-faint); }
-        .badge-version {
-            background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 6px;
-            font-size: 0.72rem; font-weight: bold; color: var(--text-muted);
+
+        .hack-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
+
+        .hack-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .hack-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 10px;
+        }
+
+        .badge-status {
+            color: #00ff66;
+            font-weight: bold;
+        }
+
         .download-action-btn {
-            background: var(--accent-red); color: #fff; border: none;
-            padding: 10px 18px; border-radius: 10px;
-            font-weight: bold; font-size: 0.88rem; cursor: pointer;
-            font-family: inherit; transition: background-color 0.2s, transform 0.15s;
-            display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        .download-action-btn:hover { background: var(--accent-hover); }
-        .download-action-btn:active { transform: scale(0.95); }
-        .download-action-btn svg { width: 18px; height: 18px; }
-        .download-action-btn.disabled { background: rgba(255,255,255,0.08); color: var(--text-faint); cursor: not-allowed; }
-        .download-action-btn.disabled:hover { background: rgba(255,255,255,0.08); }
 
-        /* ===== Search ===== */
-        .search-box {
+        .download-action-btn:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 0 12px rgba(255, 26, 85, 0.4);
+        }
+
+        /* الأقسام التفاعلية والخفية */
+        .interactive-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+            display: none;
+            text-align: right;
+        }
+        .interactive-section.active { display: block; }
+
+        input, textarea {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--card-border); border-radius: 12px;
-            background: rgba(0,0,0,0.25); color: var(--text-color);
-            font-family: inherit; font-size: 0.95rem;
-            margin-bottom: 18px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: #110004;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 0.95rem;
         }
-        .search-box::placeholder { color: var(--text-faint); }
-        .search-box:focus { outline: none; border-color: var(--accent-red); }
-
-        /* ===== Admin panel ===== */
-        .panel {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px; padding: 22px; text-align: right; margin-bottom: 18px;
-        }
-        .panel h2 { margin: 0 0 6px 0; font-size: 1.3rem; font-weight: 800; color: var(--accent-hover); }
-        .panel .panel-sub { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 18px 0; }
-        .panel hr { border: none; border-top: 1px solid var(--card-border); margin: 20px 0; }
-        .panel h3 { margin: 0 0 8px 0; font-size: 1.05rem; font-weight: 700; }
-        .admin-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-
-        label { display: block; margin: 12px 0 4px 0; color: var(--text-muted); font-size: 0.85rem; }
-        input, textarea, select {
-            width: 100%; padding: 12px 14px; margin: 3px 0;
-            border: 1px solid var(--card-border); border-radius: 11px;
-            background: rgba(0,0,0,0.25); color: var(--text-color);
-            font-family: inherit; font-size: 0.95rem;
-        }
-        input::placeholder, textarea::placeholder { color: var(--text-faint); }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-red); }
-        .field-row { display: flex; gap: 10px; }
-        .field-row > div { flex: 1; }
-
-        /* ===== Buttons ===== */
-        .btn {
-            border: none; cursor: pointer; font-family: inherit; font-weight: bold;
-            border-radius: 12px; padding: 14px 20px; font-size: 1rem;
-            transition: transform 0.15s, background-color 0.2s, opacity 0.2s;
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn:active { transform: scale(0.97); }
-        .btn-primary { background: var(--accent-red); color: #fff; box-shadow: 0 6px 18px rgba(221,0,53,0.3); }
-        .btn-primary:hover { background: var(--accent-hover); }
-        .btn-ghost { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--card-border); }
-        .btn-ghost:hover { background: var(--card-bg-hover); }
-        .btn-danger { background: var(--danger-color); color: #fff; }
-        .btn-danger:hover { opacity: 0.88; }
-        .btn-full { width: 100%; }
-        .btn svg { width: 20px; height: 20px; }
-
-        /* ===== Empty & note ===== */
-        .empty {
-            color: var(--text-muted); text-align: center; padding: 28px 16px;
-            background: var(--card-bg); border: 1px dashed var(--card-border);
-            border-radius: 14px; font-size: 0.9rem;
-        }
-        .note { color: var(--text-muted); font-size: 0.82rem; margin: 0 0 14px 0; }
-
-        /* ===== Result banners ===== */
-        .result-ok { color: var(--success-color); font-weight: bold; margin: 12px 0; }
-        .result-err { color: var(--danger-color); font-weight: bold; margin: 12px 0; }
-
-        /* ===== Toast ===== */
-        .toast {
-            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
-            background: rgba(21,0,5,0.95); border: 1px solid var(--accent-red); color: var(--text-color);
-            padding: 13px 24px; border-radius: 14px; z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            opacity: 0; transition: opacity 0.25s, transform 0.25s; pointer-events: none;
-            font-weight: 600; font-size: 0.9rem;
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.error { border-color: var(--danger-color); }
-        .toast.success { border-color: var(--success-color); }
-
-        /* ===== Modal ===== */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-            display: none; align-items: center; justify-content: center;
-            z-index: 2000; padding: 20px;
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-        }
-        .modal-overlay.show { display: flex; animation: fadeIn 0.2s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .modal {
-            background: var(--bg-solid); border: 1px solid var(--card-border);
-            border-radius: 18px; padding: 24px; max-width: 380px; width: 100%;
-            text-align: right; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-        }
-        .modal h3 { margin: 0 0 8px 0; font-size: 1.2rem; color: var(--accent-hover); }
-        .modal p { color: var(--text-muted); font-size: 0.9rem; margin: 0 0 18px 0; }
-        .modal .btn { margin-top: 6px; }
     </style>
 </head>
 <body>
 
+    <!-- الشريط العلوي للمنصة -->
     <div class="top-bar">
-        <div class="logo-area">
-            <div class="logo-mark">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/></svg>
-            </div>
-            <span class="logo-text">SHD HUB</span>
-        </div>
-        <button class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">
-            <div class="bars"><span></span><span></span><span></span></div>
-            <span>القائمة</span>
-        </button>
-    </div>
-
-    <div class="menu-panel" id="menuPanel">
-        <button data-section="home" class="active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>
-            الرئيسية
-        </button>
-        <button data-section="hacks">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
-            الهاكات والتطبيقات
-        </button>
-        <button data-section="redeem">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
-            استلام كود
-        </button>
-        <button data-section="admin-login">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-            دخول الإدارة
-        </button>
+        <div class="logo-text">SHD HUB</div>
+        <button class="menu-btn" onclick="toggleSection('admin-zone')">لوحة الإدارة</button>
     </div>
 
     <div class="main-container">
-
-        <!-- ===== HOME ===== -->
-        <div id="home" class="section active">
-            <div class="welcome-card">
-                <div class="status-badge">المنصة متاحة الآن</div>
-                <h2>SHD HUB</h2>
-                <p>منصة هاكات وتطبيقات الآيفون — تصفّح أحدث الهاكات والتطبيقات المعدّلة، واستلمها بكود مخصص.</p>
-            </div>
-            <div class="section-title">أحدث الإضافات</div>
-            <div class="hack-list" id="home-hacks"></div>
-            <button class="btn btn-ghost btn-full" onclick="showSection('hacks')">
-                عرض كل الهاكات
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
+        <!-- كرت الترحيب -->
+        <div class="welcome-card">
+            <h2>منصة SHD للهاكات</h2>
+            <p>تحميل هاكات الآيفون، جيلبريك، وتطبيقات بلس بروابط مباشرة</p>
         </div>
 
-        <!-- ===== HACKS ===== -->
-        <div id="hacks" class="section">
-            <div class="section-title">الهاكات والتطبيقات</div>
-            <input type="text" class="search-box" id="hackSearch" placeholder="ابحث عن هاك أو تطبيق...">
-            <div class="hack-list" id="hacks-display"></div>
+        <!-- زر استلام الأكواد والسكربتات المدفوعة للعملاء -->
+        <button class="download-action-btn" style="width: 100%; padding: 14px; border-radius: 12px; margin-bottom: 10px;" onclick="toggleSection('redeem-zone')">
+            🔑 استلام هاك / سكربت عبر كود تفعيل
+        </button>
+
+        <!-- منطقة التحقق من الكود المدفوع -->
+        <div id="redeem-zone" class="interactive-section">
+            <h3>تفعيل واستلام الهاك</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin:0 0 10px 0;">أدخل كود الشراء الذي استلمته لتوليد كود الهاك أو رابط التحميل:</p>
+            <input type="text" id="user-code" placeholder="أدخل كود التفعيل هنا">
+            <button class="download-action-btn" style="width:100%" onclick="redeemCode()">تحقق الآن</button>
+            <div id="redeem-result" style="margin-top:15px; text-align:center; font-weight:bold;"></div>
         </div>
 
-        <!-- ===== REDEEM ===== -->
-        <div id="redeem" class="section">
-            <div class="panel">
-                <h2>استلام كود</h2>
-                <p class="panel-sub">أدخل الكود الذي حصلت عليه لاستلام الهاك أو التطبيق المخصص لك.</p>
-                <label for="user-code">الكود</label>
-                <input type="text" id="user-code" placeholder="مثال: SHD-2024-001" autocomplete="off">
-                <button class="btn btn-primary btn-full" onclick="redeemCode()">استلام</button>
-                <div id="redeem-result"></div>
-            </div>
-        </div>
-
-        <!-- ===== ADMIN LOGIN ===== -->
-        <div id="admin-login" class="section">
-            <div class="panel">
-                <h2>دخول الإدارة</h2>
-                <p class="panel-sub">كلمة المرور الافتراضية: 1234</p>
-                <label for="admin-pass">كلمة المرور</label>
-                <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور" autocomplete="current-password">
-                <button class="btn btn-primary btn-full" onclick="checkAdminLogin()">دخول</button>
-                <p id="login-error" class="result-err" style="display:none;">كلمة المرور غير صحيحة!</p>
+        <!-- لوحة التحكم الإدارية السرية لإضافة الروابط والأكواد للعملاء -->
+        <div id="admin-zone" class="interactive-section">
+            <h3>تسجيل دخول الإدارة</h3>
+            <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور السرية (الافتراضية: 1234)">
+            <button class="download-action-btn" style="width:100%; background:#444;" onclick="checkAdminLogin()">دخول للوحة</button>
+            
+            <div id="control-panel" style="display:none; margin-top:20px;">
+                <hr style="border-color:var(--card-border); margin:15px 0;">
+                <h4>توليد كود تفعيل لعميل (هاك خاص)</h4>
+                <input type="text" id="hack-name" placeholder="اسم الهاك الخاص بالعميل">
+                <textarea id="hack-details" placeholder="رابط التحميل أو الكود البرمجي الداخلي للهاك" rows="3"></textarea>
+                <input type="text" id="new-code" placeholder="اكتب كود التفعيل المراد إعطاؤه للعميل">
+                <button class="download-action-btn" style="width:100%" onclick="addNewCustomHack()">توليد وتخزين الكود</button>
             </div>
         </div>
 
-        <!-- ===== ADMIN PANEL ===== -->
-        <div id="admin-panel" class="section">
-            <div class="panel">
-                <div class="admin-head">
-                    <h2>لوحة الإدارة</h2>
-                    <button class="btn btn-ghost" style="padding:8px 14px;font-size:0.85rem;" onclick="adminLogout()">خروج</button>
-                </div>
-                <p class="panel-sub">أضف الهاكات والتطبيقات، وأنشئ أكواد الاستلام وتابعها.</p>
-
-                <h3>إضافة هاك / تطبيق</h3>
-                <div class="field-row">
-                    <div>
-                        <label for="hack-name">الاسم</label>
-                        <input type="text" id="hack-name" placeholder="مثال: Spotify++">
-                    </div>
-                    <div>
-                        <label for="hack-version">الإصدار</label>
-                        <input type="text" id="hack-version" placeholder="v2.1">
+        <!-- قائمة الهاكات والتطبيقات المتاحة للجميع مجاناً -->
+        <div class="section-title">هاكات وتطبيقات آيفون المتاحة حالياً</div>
+        
+        <div class="hack-list">
+            <!-- كرت هاك دلتا -->
+            <div class="hack-card">
+                <div class="hack-info">
+                    <div class="hack-name">هاك دلتا آيفون (DELTA v10.45)</div>
+                    <div class="hack-meta">
+                        <span>الوضع: <span class="badge-status">شغال وآمن</span></span>
+                        <span>• نظام: iOS</span>
                     </div>
                 </div>
-                <label for="hack-category">التصنيف</label>
-                <select id="hack-category">
-                    <option value="هاك">هاك</option>
-                    <option value="تطبيق">تطبيق</option>
-                    <option value="تعديل">تعديل (Mod)</option>
-                </select>
-                <label for="hack-download">رابط التحميل</label>
-                <input type="text" id="hack-download" placeholder="https://...">
-                <label for="hack-icon">رابط الأيقونة (اختياري)</label>
-                <input type="text" id="hack-icon" placeholder="https://...">
-                <button class="btn btn-primary btn-full" onclick="addHack()">إضافة</button>
+                <!-- يمكنك مستقبلاً استبدال الرابط بداخل الـ href برابط تحميل الهاك الفعلي الخاص بك -->
+                <button class="download-action-btn" onclick="window.open('https://google.com', '_blank')">تثبيت</button>
+            </div>
 
-                <hr>
-
-                <h3>إنشاء كود استلام</h3>
-                <div class="field-row">
-                    <div>
-                        <label for="new-code">الكود</label>
-                        <input type="text" id="new-code" placeholder="SHD-2024-001">
-                    </div>
-                    <div>
-                        <label for="code-uses">عدد الاستخدامات</label>
-                        <input type="number" id="code-uses" placeholder="1" value="1" min="1">
+            <!-- كرت هاك ببجي -->
+            <div class="hack-card">
+                <div class="hack-info">
+                    <div class="hack-name">هاك ببجي آيفون (بدون جيلبريك)</div>
+                    <div class="hack-meta">
+                        <span>الوضع: <span class="badge-status">شغال وآمن</span></span>
+                        <span>• نظام: iOS</span>
                     </div>
                 </div>
-                <label for="linked-hack">الهاك المرتبط</label>
-                <select id="linked-hack"></select>
-                <button class="btn btn-primary btn-full" onclick="addCode()">إضافة الكود</button>
-
-                <hr>
-
-                <h3>الهاكات المضافة</h3>
-                <div id="admin-hacks-display" class="empty">لا توجد هاكات بعد.</div>
-
-                <hr>
-
-                <h3>الأكواد الحالية</h3>
-                <div id="codes-display" class="empty">لا توجد أكواد بعد.</div>
+                <button class="download-action-btn" onclick="window.open('https://google.com', '_blank')">تثبيت</button>
             </div>
-        </div>
 
-    </div>
-
-    <div id="toast" class="toast"></div>
-
-    <div class="modal-overlay" id="downloadModal">
-        <div class="modal">
-            <h3 id="modal-title">جاري التحميل</h3>
-            <p id="modal-desc"></p>
-            <a id="modal-link" href="#" class="btn btn-primary btn-full" target="_blank" rel="noopener">فتح رابط التحميل</a>
-            <button class="btn btn-ghost btn-full" style="margin-top:8px;" onclick="closeModal()">إغلاق</button>
+            <!-- كرت ملف DNS مطور -->
+            <div class="hack-card">
+                <div class="hack-info">
+                    <div class="hack-name">ملف تثبيت حماية وتخطي DNS آيفون</div>
+                    <div class="hack-meta">
+                        <span>الوضع: <span class="badge-status">شغال وآمن</span></span>
+                        <span>• يدعم: جميع الإصدارات</span>
+                    </div>
+                </div>
+                <button class="download-action-btn" onclick="window.open('https://google.com', '_blank')">تثبيت</button>
+            </div>
         </div>
     </div>
 
     <script>
-        const ADMIN_PASSWORD = '1234';
-        const STORAGE_KEY = 'shd_hacks_data';
+        // تخزين أكواد التفعيل المخصصة للعملاء محلياً بالمتصفح
+        let hackData = JSON.parse(localStorage.getItem('shd_hacks_data')) || { items: [] };
 
-        let data = { hacks: [], codes: [] };
-        try {
-            const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
-            if (stored && Array.isArray(stored.hacks) && Array.isArray(stored.codes)) {
-                data = stored;
-            }
-        } catch (e) {
-            data = { hacks: [], codes: [] };
+        function toggleSection(id) {
+            const target = document.getElementById(id);
+            target.style.display = target.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Seed sample data on first run
-        if (data.hacks.length === 0 && data.codes.length === 0) {
-            data.hacks = [
-                { id: 'h_1', name: 'Spotify++', version: 'v8.9', category: 'تعديل', download: '', icon: '', active: true },
-                { id: 'h_2', name: 'YouTube Ad-Free', version: 'v19.2', category: 'هاك', download: '', icon: '', active: true },
-                { id: 'h_3', name: 'Instagram Pro', version: 'v310', category: 'تطبيق', download: '', icon: '', active: true }
-            ];
-            saveData();
-        }
-
-        function saveData() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            } catch (e) {
-                showToast('تعذّر حفظ البيانات في الجهاز.', 'error');
-            }
-        }
-
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str == null ? '' : String(str);
-            return div.innerHTML;
-        }
-
-        function showToast(msg, type) {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.className = 'toast show' + (type ? ' ' + type : '');
-            clearTimeout(showToast._t);
-            showToast._t = setTimeout(() => { t.className = 'toast'; }, 2600);
-        }
-
-        // ---------- Navigation ----------
-        const menuBtn = document.getElementById('menuBtn');
-        const menuPanel = document.getElementById('menuPanel');
-        const navButtons = menuPanel.querySelectorAll('button[data-section]');
-
-        menuBtn.addEventListener('click', () => {
-            const open = menuPanel.classList.toggle('open');
-            menuBtn.classList.toggle('open', open);
-            menuBtn.setAttribute('aria-expanded', open);
-        });
-
-        navButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                showSection(btn.dataset.section);
-                menuPanel.classList.remove('open');
-                menuBtn.classList.remove('open');
-                menuBtn.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            const el = document.getElementById(id);
-            if (el) el.classList.add('active');
-            navButtons.forEach(b => b.classList.toggle('active', b.dataset.section === id));
-            const err = document.getElementById('login-error');
-            if (err) err.style.display = 'none';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ---------- Hack icons by category ----------
-        function hackIcon(category) {
-            if (category === 'هاك') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2l-2 2-2-2M14 22l-2-2-2 2M2 12l2-2-2-2M22 12l-2-2 2-2"/><circle cx="12" cy="12" r="4"/></svg>';
-            if (category === 'تطبيق') return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>';
-            return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>';
-        }
-
-        // ---------- Render hacks ----------
-        function renderHacks(containerId, hacks) {
-            const box = document.getElementById(containerId);
-            if (!box) return;
-            if (!hacks.length) {
-                box.className = 'hack-list';
-                box.innerHTML = '<div class="empty">لا توجد هاكات أو تطبيقات حاليًا.</div>';
-                return;
-            }
-            box.className = 'hack-list';
-            box.innerHTML = hacks.map(h => `
-                <div class="hack-card">
-                    <div class="hack-info">
-                        <div class="hack-icon">${hackIcon(h.category)}</div>
-                        <div class="hack-text">
-                            <div class="hack-name">${escapeHtml(h.name)}</div>
-                            <div class="hack-meta">
-                                <span class="badge-version">${escapeHtml(h.version || 'v1.0')}</span>
-                                <span>${escapeHtml(h.category || 'هاك')}</span>
-                                <span class="badge-status ${h.active ? '' : 'offline'}">${h.active ? 'متاح' : 'معطّل'}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="download-action-btn ${h.active ? '' : 'disabled'}" ${h.active ? '' : 'disabled'} onclick="openDownload('${escapeHtml(h.id)}')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        تحميل
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        function renderHomeHacks() {
-            const recent = data.hacks.slice(-4).reverse();
-            renderHacks('home-hacks', recent);
-        }
-
-        function renderAllHacks() {
-            const search = (document.getElementById('hackSearch')?.value || '').toLowerCase().trim();
-            const filtered = search
-                ? data.hacks.filter(h => h.name.toLowerCase().includes(search) || (h.category || '').toLowerCase().includes(search))
-                : data.hacks;
-            renderHacks('hacks-display', filtered);
-        }
-
-        // ---------- Download modal ----------
-        function openDownload(id) {
-            const hack = data.hacks.find(h => h.id === id);
-            if (!hack || !hack.active) return;
-            if (hack.download) {
-                document.getElementById('modal-title').textContent = hack.name;
-                document.getElementById('modal-desc').textContent = 'سيتم فتح رابط التحميل في نافذة جديدة.';
-                document.getElementById('modal-link').href = hack.download;
-            } else {
-                document.getElementById('modal-title').textContent = hack.name;
-                document.getElementById('modal-desc').textContent = 'لم يتم إضافة رابط تحميل لهذا العنصر بعد. استخدم كود الاستلام للحصول عليه.';
-                document.getElementById('modal-link').href = '#';
-                document.getElementById('modal-link').onclick = (e) => { e.preventDefault(); showSection('redeem'); closeModal(); };
-            }
-            document.getElementById('downloadModal').classList.add('show');
-        }
-
-        function closeModal() {
-            document.getElementById('downloadModal').classList.remove('show');
-        }
-        document.getElementById('downloadModal').addEventListener('click', e => {
-            if (e.target.id === 'downloadModal') closeModal();
-        });
-
-        // ---------- Search ----------
-        document.getElementById('hackSearch').addEventListener('input', renderAllHacks);
-
-        // ---------- Redeem ----------
-        function redeemCode() {
-            const input = document.getElementById('user-code');
-            const result = document.getElementById('redeem-result');
-            const code = input.value.trim();
-            result.innerHTML = '';
-
-            if (!code) {
-                result.innerHTML = '<p class="result-err">يرجى إدخال الكود أولاً.</p>';
-                return;
-            }
-            const entry = data.codes.find(c => c.code === code);
-            if (!entry) {
-                result.innerHTML = '<p class="result-err">الكود غير صحيح أو غير موجود.</p>';
-                return;
-            }
-            if (entry.uses <= 0) {
-                result.innerHTML = '<p class="result-err">تم استنفاد هذا الكود بالكامل.</p>';
-                return;
-            }
-            const hack = data.hacks.find(h => h.id === entry.hackId);
-            if (!hack) {
-                result.innerHTML = '<p class="result-err">العنصر المرتبط بهذا الكود غير موجود.</p>';
-                return;
-            }
-            entry.uses -= 1;
-            entry.redeemed = (entry.redeemed || 0) + 1;
-            saveData();
-
-            result.innerHTML = `
-                <p class="result-ok">تم استلام الكود بنجاح! المتبقي: ${entry.uses}.</p>
-                <div class="hack-card">
-                    <div class="hack-info">
-                        <div class="hack-icon">${hackIcon(hack.category)}</div>
-                        <div class="hack-text">
-                            <div class="hack-name">${escapeHtml(hack.name)}</div>
-                            <div class="hack-meta">
-                                <span class="badge-version">${escapeHtml(hack.version || 'v1.0')}</span>
-                                <span>${escapeHtml(hack.category || 'هاك')}</span>
-                            </div>
-                        </div>
-                    </div>
-                    ${hack.download ? `<a href="${escapeHtml(hack.download)}" target="_blank" rel="noopener" class="download-action-btn">تحميل</a>` : '<button class="download-action-btn disabled" disabled>لا يوجد رابط</button>'}
-                </div>
-            `;
-            input.value = '';
-            renderCodes();
-            showToast('تم استلام العنصر', 'success');
-        }
-
-        // ---------- Admin ----------
         function checkAdminLogin() {
             const pass = document.getElementById('admin-pass').value;
-            if (pass === ADMIN_PASSWORD) {
-                document.getElementById('login-error').style.display = 'none';
-                showSection('admin-panel');
-                renderAdminSelect();
-                renderCodes();
-                renderAdminHacks();
+            if(pass === "1234") { 
+                document.getElementById('control-panel').style.display = 'block';
+                alert("تم تسجيل الدخول بنجاح إلى إدارة الهاكات!");
             } else {
-                document.getElementById('login-error').style.display = 'block';
+                alert("كلمة المرور خاطئة!");
             }
-        }
-
-        function adminLogout() {
-            document.getElementById('admin-pass').value = '';
-            showSection('home');
-        }
-
-        function renderAdminSelect() {
-            const sel = document.getElementById('linked-hack');
-            sel.innerHTML = data.hacks.length
-                ? data.hacks.map(h => `<option value="${escapeHtml(h.id)}">${escapeHtml(h.name)}</option>`).join('')
-                : '<option value="">— لا توجد هاكات —</option>';
-        }
-
-        function addHack() {
-            const name = document.getElementById('hack-name').value.trim();
-            const version = document.getElementById('hack-version').value.trim();
-            const category = document.getElementById('hack-category').value;
-            const download = document.getElementById('hack-download').value.trim();
-            const icon = document.getElementById('hack-icon').value.trim();
-            if (!name) { showToast('يرجى إدخال اسم الهاك أو التطبيق.', 'error'); return; }
-            data.hacks.push({ id: 'h_' + Date.now(), name, version: version || 'v1.0', category, download, icon, active: true });
-            saveData();
-            renderAllHacks();
-            renderHomeHacks();
-            renderAdminSelect();
-            renderAdminHacks();
-            document.getElementById('hack-name').value = '';
-            document.getElementById('hack-version').value = '';
-            document.getElementById('hack-download').value = '';
-            document.getElementById('hack-icon').value = '';
-            showToast('تمت إضافة العنصر', 'success');
-        }
-
-        function renderAdminHacks() {
-            const box = document.getElementById('admin-hacks-display');
-            if (!box) return;
-            if (!data.hacks.length) {
-                box.className = 'empty';
-                box.innerHTML = 'لا توجد هاكات بعد.';
-                return;
-            }
-            box.className = '';
-            box.innerHTML = data.hacks.map((h, i) => `
-                <div class="hack-card" style="margin-bottom:12px;">
-                    <div class="hack-info">
-                        <div class="hack-icon">${hackIcon(h.category)}</div>
-                        <div class="hack-text">
-                            <div class="hack-name">${escapeHtml(h.name)}</div>
-                            <div class="hack-meta">
-                                <span class="badge-version">${escapeHtml(h.version || 'v1.0')}</span>
-                                <span>${escapeHtml(h.category || 'هاك')}</span>
-                                <span class="badge-status ${h.active ? '' : 'offline'}">${h.active ? 'متاح' : 'معطّل'}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display:flex;gap:6px;flex-shrink:0;">
-                        <button class="download-action-btn" style="background:var(--card-bg-hover);color:#fff;padding:8px 12px;font-size:0.8rem;" onclick="toggleHack(${i})">${h.active ? 'تعطيل' : 'تفعيل'}</button>
-                        <button class="download-action-btn disabled" style="background:var(--danger-color);color:#fff;" onclick="deleteHack(${i})">حذف</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleHack(index) {
-            const h = data.hacks[index];
-            if (!h) return;
-            h.active = !h.active;
-            saveData();
-            renderAllHacks();
-            renderHomeHacks();
-            renderAdminHacks();
-            showToast(h.active ? 'تم تفعيل العنصر' : 'تم تعطيل العنصر', 'success');
-        }
-
-        function deleteHack(index) {
-            const h = data.hacks[index];
-            if (!h) return;
-            data.hacks.splice(index, 1);
-            data.codes = data.codes.filter(c => c.hackId !== h.id);
-            saveData();
-            renderAllHacks();
-            renderHomeHacks();
-            renderAdminSelect();
-            renderAdminHacks();
-            renderCodes();
-            showToast('تم حذف العنصر', 'success');
-        }
-
-        function addCode() {
-            const code = document.getElementById('new-code').value.trim();
-            const uses = parseInt(document.getElementById('code-uses').value, 10);
-            const hackId = document.getElementById('linked-hack').value;
-            if (!code) { showToast('يرجى إدخال الكود.', 'error'); return; }
-            if (isNaN(uses) || uses < 1) { showToast('عدد الاستخدامات يجب أن يكون 1 على الأقل.', 'error'); return; }
-            if (data.codes.some(c => c.code === code)) { showToast('هذا الكود موجود مسبقًا.', 'error'); return; }
-            if (!hackId) { showToast('أضف هاكًا أولًا ثم اربط الكود به.', 'error'); return; }
-            data.codes.push({ code, uses, hackId, redeemed: 0 });
-            saveData();
-            renderCodes();
-            document.getElementById('new-code').value = '';
-            document.getElementById('code-uses').value = '1';
-            showToast('تمت إضافة الكود', 'success');
-        }
-
-        function renderCodes() {
-            const box = document.getElementById('codes-display');
-            if (!box) return;
-            if (!data.codes.length) {
-                box.className = 'empty';
-                box.innerHTML = 'لا توجد أكواد بعد.';
-                return;
-            }
-            box.className = '';
-            box.innerHTML = data.codes.map((c, i) => {
-                const hack = data.hacks.find(h => h.id === c.hackId);
-                return `
-                    <div class="hack-card" style="margin-bottom:12px;">
-                        <div class="hack-info">
-                            <div class="hack-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
-                            <div class="hack-text">
-                                <div class="hack-name" style="font-family:monospace;font-size:0.95rem;">${escapeHtml(c.code)}</div>
-                                <div class="hack-meta">
-                                    <span>${hack ? escapeHtml(hack.name) : 'محذوف'}</span>
-                                    <span>المتبقي: <b>${c.uses}</b></span>
-                                    <span>المستخدم: <b>${c.redeemed || 0}</b></span>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="download-action-btn disabled" style="background:var(--danger-color);color:#fff;" onclick="deleteCode(${i})">حذف</button>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function deleteCode(index) {
-            const entry = data.codes[index];
-            if (!entry) return;
-            data.codes.splice(index, 1);
-            saveData();
-            renderCodes();
-            showToast('تم حذف الكود', 'success');
-        }
-
-        // ---------- Init ----------
-        renderHomeHacks();
-        renderAllHacks();
-        document.getElementById('user-code').addEventListener('keydown', e => {
-            if (e.key === 'Enter') redeemCode();
-        });
-        document.getElementById('admin-pass').addEventListener('keydown', e => {
-            if (e.key === 'Enter') checkAdminLogin();
-        });
-    </script>
-</body>
-</html>
