@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RTX HUB — هاك دلتا للايفون</title>
+    <title>MATRIX HUB — DELTA TERMINAL</title>
     <style>
         :root {
-            --bg-color: #000915; 
-            --card-bg: rgba(0, 20, 45, 0.65);
-            --neon-blue: #00d2ff; 
-            --neon-accent: #0066ff; 
+            --bg-color: #050508; 
+            --panel-bg: #0d0e15;
+            --cyber-blue: #00f0ff; 
+            --cyber-red: #ff0055; 
             --text-color: #ffffff;
+            --matrix-green: #00ff66;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace, 'Segoe UI';
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -23,225 +24,220 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .navbar {
+        /* الهيدر الجديد: شعار تقني مشفر ومستقبلي بديل لـ SHD */
+        .cyber-header {
             width: 100%;
             max-width: 450px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 0 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 10px;
+            border-bottom: 2px dashed rgba(255, 0, 85, 0.3);
         }
 
-        .brand-logo {
-            font-size: 1.8rem;
+        .cyber-title {
+            font-size: 2.2rem;
             font-weight: 900;
-            background: linear-gradient(to right, var(--neon-accent), var(--neon-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+            color: var(--text-color);
+            text-shadow: 2px 2px var(--cyber-red), -2px -2px var(--cyber-blue);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .cyber-subtitle {
+            font-size: 0.8rem;
+            color: var(--cyber-blue);
             letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+            margin-top: 5px;
+            font-weight: bold;
         }
 
-        .menu-icon {
-            color: var(--neon-blue);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .content-container {
+        .main-content {
             width: 100%;
             max-width: 450px;
             text-align: center;
         }
 
-        .welcome-title {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-        .welcome-title span {
-            color: var(--neon-blue);
-            font-weight: 900;
-        }
-
-        .image-card {
-            background: var(--card-bg);
-            border: 2px solid rgba(0, 210, 255, 0.25);
-            border-radius: 24px;
-            padding: 15px;
+        /* صندوق الصورة الهندسي الجديد */
+        .terminal-box {
+            background-color: var(--panel-bg);
+            border-left: 4px solid var(--cyber-blue);
+            border-right: 4px solid var(--cyber-red);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            padding: 12px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 210, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            position: relative;
         }
 
-        .delta-banner {
+        .terminal-box::before {
+            content: 'SYSTEM: ACTIVE';
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--cyber-blue);
+            color: #000;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .banner-img {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 2px;
             display: block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            filter: hue-rotate(180deg) brightness(0.9); /* يغير طابع الصورة المرفوعة لتناسب السايببربانك */
         }
 
-        .features-section {
+        /* قسم المميزات الرقمي */
+        .info-panel {
+            background: rgba(13, 14, 21, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 4px;
             margin-bottom: 30px;
+            text-align: right;
         }
 
-        .features-title {
-            font-size: 1.6rem;
-            color: var(--neon-blue);
+        .panel-title {
+            font-size: 1.2rem;
+            color: var(--cyber-red);
+            margin-bottom: 15px;
             font-weight: bold;
-            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-        .feature-row {
+        .spec-line {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
-            padding: 0 20px;
-            font-size: 1.1rem;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.05);
+            font-size: 0.95rem;
         }
+        .spec-line:last-child { border-bottom: none; }
 
-        .feature-text {
-            color: #ffffff;
-            font-weight: 500;
-        }
+        .spec-tag { color: #888; }
+        .spec-value { color: #fff; font-weight: bold; }
 
-        .feature-sparkle {
-            color: var(--neon-blue);
-            font-size: 1.2rem;
-            text-shadow: 0 0 8px var(--neon-blue);
-        }
+        .tag-glow-blue { color: var(--cyber-blue); text-shadow: 0 0 8px var(--cyber-blue); }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
+        /* شارات الحالة الهندسية */
+        .grid-status {
+            display: flex;
+            gap: 10px;
             justify-content: center;
-            gap: 8px;
-            border: 2px solid #00ff66;
-            color: #00ff66;
-            background: rgba(0, 255, 102, 0.05);
-            padding: 8px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 15px;
-            box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
-        }
-
-        .status-badge-failed {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border: 2px solid #ff3366;
-            color: #ff3366;
-            background: rgba(255, 51, 102, 0.05);
-            padding: 8px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1rem;
             margin-bottom: 25px;
         }
 
-        .install-btn {
-            background: linear-gradient(135deg, #0044ee, #00bfff);
-            color: #ffffff;
-            border: none;
+        .badge-cyber {
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 3px;
+            letter-spacing: 1px;
+        }
+        .badge-online { background: rgba(0, 255, 102, 0.1); border: 1px solid var(--matrix-green); color: var(--matrix-green); }
+        .badge-offline { background: rgba(255, 0, 85, 0.1); border: 1px solid var(--cyber-red); color: var(--cyber-red); }
+
+        /* أزرار التحميل بنمط الكومبيوتر المتطور والزوايا الحادة */
+        .cyber-btn {
+            background: transparent;
+            color: var(--cyber-blue);
+            border: 2px solid var(--cyber-blue);
             width: 100%;
             padding: 16px;
-            border-radius: 16px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
-            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.2s ease;
             margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
-        .install-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 210, 255, 0.55);
+        .cyber-btn:hover {
+            background: var(--cyber-blue);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            transform: scale(1.01);
         }
 
-        .install-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+        .cyber-btn-secondary {
+            border-color: var(--cyber-red);
+            color: var(--cyber-red);
+            box-shadow: 0 0 10px rgba(ff, 0, 55, 0.1);
+        }
+
+        .cyber-btn-secondary:hover {
+            background: var(--cyber-red);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
         }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <div class="brand-logo">RTX</div>
-        <div class="menu-icon">☰</div>
+    <!-- الهيدر التقني الجديد بالكامل -->
+    <div class="cyber-header">
+        <h1 class="cyber-title">RTX SYSTEM</h1>
+        <div class="cyber-subtitle">// TERMINAL ENGINE CONNECTED //</div>
     </div>
 
-    <div class="content-container">
-        <div class="welcome-title">
-            مرحباً بك في موقع <span>RTX</span> هنا لدينا هاك<br>دلتا للايفون
+    <div class="main-content">
+        <!-- صندوق العرض المطور -->
+        <div class="terminal-box">
+            <img class="banner-img" src="https://githubusercontent.com" alt="Delta Interface">
         </div>
 
-        <div class="image-card">
-            <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
-        </div>
-
-        <div class="features-section">
-            <div class="features-title">مميزات هاك دلتا</div>
+        <!-- قائمة البيانات والمميزات بشكلها الهندسي المختلف -->
+        <div class="info-panel">
+            <div class="panel-title">> حزمة المزايا الأساسية</div>
             
-            <div class="feature-row">
-                <span class="feature-text">من اقوى الهاكات حمايتاً</span>
-                <span class="feature-sparkle">✦</span>
+            <div class="spec-line">
+                <span class="spec-tag">مستوى الحماية الحالي:</span>
+                <span class="spec-value tag-glow-blue">أقصى تشفير أمني</span>
             </div>
             
-            <div class="feature-row">
-                <span class="feature-text">سهولة الحصول على المفتاح</span>
-                <span class="feature-sparkle">✦</span>
+            <div class="spec-line">
+                <span class="spec-tag">نظام تجاوز المفاتيح:</span>
+                <span class="spec-value">توليد تلقائي وسريع</span>
             </div>
             
-            <div class="feature-row">
-                <span class="feature-text">يمكنك بحث السكربتات فيه</span>
-                <span class="feature-sparkle">✦</span>
+            <div class="spec-line">
+                <span class="spec-tag">محرك البحث البرمجي:</span>
+                <span class="spec-value tag-glow-blue">مدعوم بالكامل للسكربتات</span>
             </div>
         </div>
 
-        <div>
-            <div class="status-badge">يعمل ✓</div>
+        <!-- شارات الحالة الهندسية -->
+        <div class="grid-status">
+            <span class="badge-cyber badge-online">CORE: ONLINE</span>
+            <span class="badge-cyber badge-offline">SECURE: BYPASS</span>
         </div>
 
-        <!-- زر التثبيت الأول -->
-        <button class="install-btn" onclick="triggerDirectInstall()">
-            Delta Install
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <!-- أزرار التثبيت الذكية والمختلفة كلياً بالتأثيرات البصرية -->
+        <button class="cyber-btn" onclick="openSecureNode()">
+            [ Execute Download Node ]
         </button>
 
-        <div>
-            <div class="status-badge-failed">لا يعمل ✕</div>
-        </div>
-
-        <!-- زر التثبيت الثاني -->
-        <button class="install-btn" onclick="triggerDirectInstall()">
-            Delta Install
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <button class="cyber-btn cyber-btn-secondary" onclick="openSecureNode()">
+            [ Alternative Server Link ]
         </button>
     </div>
 
     <script>
-        function triggerDirectInstall() {
-            // تم تغيير الرابط برابط ملف plist حقيقي وشغال حالياً لملف هاك دلتا الرسمي الموقّع
-            const plistUrl = "https://delta.bz";
-            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
+        function openSecureNode() {
+            // فتح صفحة التحميل الآمنة والمستقرة لتفادي تعليق نظام أبل الداخلي للآيفون
+            window.open("https://delta.bz", "_blank");
         }
     </script>
 </body>
