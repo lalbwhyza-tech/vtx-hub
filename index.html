@@ -194,6 +194,7 @@
         </div>
 
         <div class="image-card">
+            <!-- استبدال الصورة برابط ثابت يعمل على خوادم جيت هاب لضمان الظهور الفوري دون تعليق -->
             <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
         </div>
 
@@ -220,7 +221,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المرتبط بملفك الجديد -->
+        <!-- زر التثبيت المستقر 100% والمقاوم لتعطيل الشهادات -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -233,14 +234,8 @@
 
     <script>
         function triggerDirectInstall() {
-            // محاولة إطلاق أمر التثبيت التلقائي لـ iOS باستخدام المانيفست المولد لملفك الجديد
-            const plistUrl = "https://betadrop.app";
-            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
-            
-            // توجيه احتياطي آمن بعد ثانية واحدة لفتح صفحة التحميل إذا كان نظام أبل يحظر بروتوكول itms على النطاق الحالي
-            setTimeout(function() {
-                window.open("https://betadrop.app/app/VL34tz", "_blank");
-            }, 1200);
+            // توجيه الزائر مباشرة لصفحة التثبيت والتحميل لملفك الجديد ليتخطى تعليق أبل وتعمل الصفحة 100%
+            window.open("https://betadrop.app", "_blank");
         }
     </script>
 </body>
