@@ -220,7 +220,6 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت اللاسلكي المباشر المربوط بملفك الجديد من بيتا دروب -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -233,8 +232,8 @@
 
     <script>
         function triggerDirectInstall() {
-            // تم جلب واستخراج كود المانيفست المباشر لـ أبل من خادم بيتا دروب الخاص برابط wyTvTE الجديد لضمان الانبثاق
-            const plistUrl = "https://betadrop.app";
+            // استخدام رابط نقي مشفر لا يشترط ملفات تعريف مسبقة لتظهر رسالة التثبيت الفعلية فوراً
+            const plistUrl = "https://isigncloud.com";
             window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
         }
     </script>
