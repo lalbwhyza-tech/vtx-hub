@@ -6,10 +6,10 @@
     <title>SHD HUB — هاك دلتا للايفون</title>
     <style>
         :root {
-            --bg-color: #0b0114; 
-            --card-bg: rgba(20, 10, 35, 0.6);
-            --neon-blue: #00d2ff;
-            --neon-purple: #9d4edd;
+            --bg-color: #000b18; 
+            --card-bg: rgba(0, 20, 40, 0.6);
+            --neon-blue: #00bfff; 
+            --neon-accent: #0077ff; 
             --text-color: #ffffff;
         }
 
@@ -38,15 +38,15 @@
         .brand-logo {
             font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(to right, #9d4edd, var(--neon-blue));
+            background: linear-gradient(to right, var(--neon-accent), var(--neon-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
         }
 
         .menu-icon {
-            color: var(--neon-purple);
+            color: var(--neon-blue);
             font-size: 1.5rem;
             cursor: pointer;
         }
@@ -70,11 +70,11 @@
 
         .image-card {
             background: var(--card-bg);
-            border: 2px solid rgba(157, 78, 221, 0.2);
+            border: 2px solid rgba(0, 191, 255, 0.2);
             border-radius: 24px;
             padding: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(157, 78, 221, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 191, 255, 0.15);
         }
 
         .delta-banner {
@@ -110,9 +110,9 @@
         }
 
         .feature-sparkle {
-            color: var(--neon-purple);
+            color: var(--neon-blue);
             font-size: 1.2rem;
-            text-shadow: 0 0 8px var(--neon-purple);
+            text-shadow: 0 0 8px var(--neon-blue);
         }
 
         .status-badge {
@@ -132,7 +132,7 @@
         }
 
         .install-btn {
-            background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+            background: linear-gradient(135deg, #0055ff, #00bfff);
             color: #ffffff;
             border: none;
             width: 100%;
@@ -145,14 +145,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.3);
             transition: all 0.3s ease;
             margin-bottom: 15px;
         }
 
         .install-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(157, 78, 221, 0.6);
+            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.5);
         }
 
         .install-btn svg {
@@ -220,8 +220,8 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المستقر والمطور كلياً لتفادي حظر أبل المباشر -->
-        <button class="install-btn" onclick="triggerStableInstall()">
+        <!-- زر التثبيت المرتبط بملفك الجديد -->
+        <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </button>
@@ -229,17 +229,18 @@
         <div>
             <div class="status-badge-failed">لا يعمل ✕</div>
         </div>
-
-        <button class="install-btn" onclick="triggerStableInstall()">
-            Delta Install
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-        </button>
     </div>
 
     <script>
-        function triggerStableInstall() {
-            // التوجيه إلى خادم تحميل مباشر يعمل بدون تعليق وموثق للآيفون لتثبيت التطبيق بنجاح
-            window.open("https://delta.bz", "_blank");
+        function triggerDirectInstall() {
+            // محاولة إطلاق أمر التثبيت التلقائي لـ iOS باستخدام المانيفست المولد لملفك الجديد
+            const plistUrl = "https://betadrop.app";
+            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
+            
+            // توجيه احتياطي آمن بعد ثانية واحدة لفتح صفحة التحميل إذا كان نظام أبل يحظر بروتوكول itms على النطاق الحالي
+            setTimeout(function() {
+                window.open("https://betadrop.app/app/VL34tz", "_blank");
+            }, 1200);
         }
     </script>
 </body>
