@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATRIX HUB — DELTA TERMINAL</title>
+    <title>RTX HUB — PREMIUM SYSTEM</title>
     <style>
         :root {
-            --bg-color: #050508; 
-            --panel-bg: #0d0e15;
-            --cyber-blue: #00f0ff; 
-            --cyber-red: #ff0055; 
-            --text-color: #ffffff;
-            --matrix-green: #00ff66;
+            --bg-dark: #02040a;
+            --glass-bg: rgba(6, 11, 25, 0.6);
+            --neon-cyan: #00f0ff;
+            --neon-blue: #0066ff;
+            --text-main: #ffffff;
+            --text-muted: #8fa0c0;
+            --success-green: #00ff66;
         }
 
         body {
-            font-family: 'Courier New', Courier, monospace, 'Segoe UI';
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -25,219 +26,231 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 20%, rgba(0, 102, 255, 0.15), transparent 60%);
         }
 
-        /* الهيدر الجديد: شعار تقني مشفر ومستقبلي بديل لـ SHD */
-        .cyber-header {
+        /* الهيدر الاحترافي الفخم */
+        .premium-header {
             width: 100%;
-            max-width: 450px;
+            max-width: 440px;
             text-align: center;
-            margin-bottom: 30px;
-            padding: 10px;
-            border-bottom: 2px dashed rgba(255, 0, 85, 0.3);
+            margin-bottom: 25px;
+            padding-top: 10px;
         }
 
-        .cyber-title {
-            font-size: 2.2rem;
+        .brand-name {
+            font-size: 2.4rem;
             font-weight: 900;
-            letter-spacing: 4px;
-            color: var(--text-color);
-            text-shadow: 2px 2px var(--cyber-red), -2px -2px var(--cyber-blue);
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #ffffff 30%, var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin: 0;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .system-status {
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            margin-top: 6px;
+            font-weight: 700;
             text-transform: uppercase;
         }
 
-        .cyber-subtitle {
-            font-size: 0.8rem;
-            color: var(--cyber-blue);
-            letter-spacing: 2px;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-        .main-content {
+        .main-wrapper {
             width: 100%;
-            max-width: 450px;
-            text-align: center;
+            max-width: 440px;
         }
 
-        /* صندوق الصورة الهندسي الجديد */
-        .terminal-box {
-            background-color: var(--panel-bg);
-            border-left: 4px solid var(--cyber-blue);
-            border-right: 4px solid var(--cyber-red);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            border-radius: 4px;
+        /* لوحة العرض الزجاجية المخرمة */
+        .display-panel {
+            background: var(--glass-bg);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 20px;
             padding: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-            position: relative;
+            margin-bottom: 25px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
         }
 
-        .terminal-box::before {
-            content: 'SYSTEM: ACTIVE';
-            position: absolute;
-            top: -10px;
-            right: 15px;
-            background: var(--cyber-blue);
-            color: #000;
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            font-weight: bold;
-            border-radius: 3px;
-        }
-
-        .banner-img {
+        .showcase-media {
             width: 100%;
-            border-radius: 2px;
+            border-radius: 14px;
             display: block;
-            filter: hue-rotate(180deg) brightness(0.9); /* يغير طابع الصورة المرفوعة لتناسب السايببربانك */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
-        /* قسم المميزات الرقمي */
-        .info-panel {
-            background: rgba(13, 14, 21, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        /* حاوية المزايا الفاخرة */
+        .features-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
             padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: right;
         }
 
-        .panel-title {
-            font-size: 1.2rem;
-            color: var(--cyber-red);
+        .features-header-title {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
             margin-bottom: 15px;
             font-weight: bold;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .spec-line {
+        .features-header-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: var(--neon-cyan);
+            border-radius: 2px;
+        }
+
+        .feature-item-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed rgba(255,255,255,0.05);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
             font-size: 0.95rem;
         }
-        .spec-line:last-child { border-bottom: none; }
+        .feature-item-row:last-child { border-bottom: none; }
 
-        .spec-tag { color: #888; }
-        .spec-value { color: #fff; font-weight: bold; }
+        .feature-label { color: var(--text-muted); }
+        .feature-value { color: #fff; font-weight: 600; }
+        .glow-cyan { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 240, 255, 0.6); }
 
-        .tag-glow-blue { color: var(--cyber-blue); text-shadow: 0 0 8px var(--cyber-blue); }
-
-        /* شارات الحالة الهندسية */
-        .grid-status {
+        /* شارة النبض اللاسلكي للشغال */
+        .badge-container {
             display: flex;
-            gap: 10px;
             justify-content: center;
             margin-bottom: 25px;
         }
 
-        .badge-cyber {
-            padding: 6px 16px;
-            font-size: 0.85rem;
+        .pulse-badge {
+            background: rgba(0, 255, 102, 0.06);
+            border: 1px solid var(--success-green);
+            color: var(--success-green);
+            padding: 8px 24px;
+            font-size: 0.9rem;
             font-weight: bold;
-            border-radius: 3px;
-            letter-spacing: 1px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
         }
-        .badge-online { background: rgba(0, 255, 102, 0.1); border: 1px solid var(--matrix-green); color: var(--matrix-green); }
-        .badge-offline { background: rgba(255, 0, 85, 0.1); border: 1px solid var(--cyber-red); color: var(--cyber-red); }
 
-        /* أزرار التحميل بنمط الكومبيوتر المتطور والزوايا الحادة */
-        .cyber-btn {
-            background: transparent;
-            color: var(--cyber-blue);
-            border: 2px solid var(--cyber-blue);
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--success-green);
+            border-radius: 50%;
+            animation: pulse-glow 1.5s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+            70% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 6px transparent; }
+            100% { transform: scale(0.9); opacity: 0.6; box-shadow: 0 0 0 0 transparent; }
+        }
+
+        /* زر التثبيت الزجاجي الفاخر والمطور للانبثاق الفوري */
+        .premium-btn {
+            background: linear-gradient(135deg, var(--neon-blue), #0040c0);
+            color: var(--text-main);
+            border: none;
             width: 100%;
-            padding: 16px;
-            font-size: 1.1rem;
+            padding: 18px;
+            font-size: 1.2rem;
             font-weight: bold;
+            border-radius: 16px;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            transition: all 0.2s ease;
-            margin-bottom: 15px;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
         }
 
-        .cyber-btn:hover {
-            background: var(--cyber-blue);
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-            transform: scale(1.01);
+        .premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.5);
+            background: linear-gradient(135deg, #0077ff, var(--neon-blue));
         }
 
-        .cyber-btn-secondary {
-            border-color: var(--cyber-red);
-            color: var(--cyber-red);
-            box-shadow: 0 0 10px rgba(ff, 0, 55, 0.1);
-        }
-
-        .cyber-btn-secondary:hover {
-            background: var(--cyber-red);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+        .premium-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر التقني الجديد بالكامل -->
-    <div class="cyber-header">
-        <h1 class="cyber-title">RTX SYSTEM</h1>
-        <div class="cyber-subtitle">// TERMINAL ENGINE CONNECTED //</div>
+    <!-- هيدر RTX المطور -->
+    <div class="premium-header">
+        <h1 class="brand-name">RTX HUB</h1>
+        <div class="system-status">● EXECUTOR NETWORK SECURE ●</div>
     </div>
 
-    <div class="main-content">
-        <!-- صندوق العرض المطور -->
-        <div class="terminal-box">
-            <img class="banner-img" src="https://githubusercontent.com" alt="Delta Interface">
+    <div class="main-wrapper">
+        <!-- لوحة العرض الزجاجية الفخمة -->
+        <div class="display-panel">
+            <img class="showcase-media" src="https://githubusercontent.com" alt="Delta Banner">
         </div>
 
-        <!-- قائمة البيانات والمميزات بشكلها الهندسي المختلف -->
-        <div class="info-panel">
-            <div class="panel-title">> حزمة المزايا الأساسية</div>
+        <!-- لوحة المزايا الفاخرة -->
+        <div class="features-panel">
+            <div class="features-header-title">المواصفات الفنية للهاك</div>
             
-            <div class="spec-line">
-                <span class="spec-tag">مستوى الحماية الحالي:</span>
-                <span class="spec-value tag-glow-blue">أقصى تشفير أمني</span>
-            </div>
-            
-            <div class="spec-line">
-                <span class="spec-tag">نظام تجاوز المفاتيح:</span>
-                <span class="spec-value">توليد تلقائي وسريع</span>
-            </div>
-            
-            <div class="spec-line">
-                <span class="spec-tag">محرك البحث البرمجي:</span>
-                <span class="spec-value tag-glow-blue">مدعوم بالكامل للسكربتات</span>
+            <div class="feature-row">
+                <div class="feature-item-row">
+                    <span class="feature-label">مستوى الحماية والحظر:</span>
+                    <span class="feature-value glow-cyan">تخطي كامل وآمن 100%</span>
+                </div>
+                <div class="feature-item-row">
+                    <span class="feature-label">نظام الحصول على المفتاح:</span>
+                    <span class="feature-value">سهل وتلقائي بالكامل</span>
+                </div>
+                <div class="feature-item-row">
+                    <span class="feature-label">قاعدة بيانات السكربتات:</span>
+                    <span class="feature-value glow-cyan">مدمجة ومحدثة دورياً</span>
+                </div>
             </div>
         </div>
 
-        <!-- شارات الحالة الهندسية -->
-        <div class="grid-status">
-            <span class="badge-cyber badge-online">CORE: ONLINE</span>
-            <span class="badge-cyber badge-offline">SECURE: BYPASS</span>
+        <!-- شارة الحالة بالنبض المضيء -->
+        <div class="badge-container">
+            <div class="pulse-badge">
+                <span class="pulse-dot"></span>
+                النظام يعمل بكفاءة حالياً
+            </div>
         </div>
 
-        <!-- أزرار التثبيت الذكية والمختلفة كلياً بالتأثيرات البصرية -->
-        <button class="cyber-btn" onclick="openSecureNode()">
-            [ Execute Download Node ]
-        </button>
-
-        <button class="cyber-btn cyber-btn-secondary" onclick="openSecureNode()">
-            [ Alternative Server Link ]
+        <!-- زر التثبيت المطور الذي يطلق نافذة التثبيت داخل موقعك مباشرة دون الخروج -->
+        <button class="premium-btn" onclick="executeOtaInstall()">
+            Delta Install
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </button>
     </div>
 
     <script>
-        function openSecureNode() {
-            // فتح صفحة التحميل الآمنة والمستقرة لتفادي تعليق نظام أبل الداخلي للآيفون
-            window.open("https://delta.bz", "_blank");
+        function executeOtaInstall() {
+            // رابط ملف manifest.plist الرسمي المحدث والخاص بتطبيق دلتا للايفون 
+            // هذا الكود يستدعي بروتوكول itms-services لتنبثق رسالة "يرغب في التثبيت" للزائر فوراً فوق التصميم
+            const manifestUrl = "https://delta.bz";
+            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(manifestUrl);
         }
     </script>
 </body>
