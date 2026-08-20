@@ -220,8 +220,8 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المطور المستجيب دائماً -->
-        <button class="install-btn" onclick="forceOtaInstall()">
+        <!-- زر التثبيت المستقر والمطور كلياً لتفادي حظر أبل المباشر -->
+        <button class="install-btn" onclick="triggerStableInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </button>
@@ -230,19 +230,16 @@
             <div class="status-badge-failed">لا يعمل ✕</div>
         </div>
 
-        <!-- زر التثبيت الثاني -->
-        <button class="install-btn" onclick="forceOtaInstall()">
+        <button class="install-btn" onclick="triggerStableInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </button>
     </div>
 
     <script>
-        function forceOtaInstall() {
-            // استخدام صفحة توجيه ذكية ومفتوحة المصدر لفك قيود الحظر المفروضة من أبل على النطاقات الفرعية لـ github.io
-            // هذا الرابط المباشر يضمن استجابة الزر بنسبة 100% وانبثاق أمر التثبيت فوراً للمستخدمين
-            const targetPlist = "https://isigncloud.com";
-            window.location.href = "https://appcenter.ms" + encodeURIComponent("itms-services://?action=download-manifest&url=" + targetPlist);
+        function triggerStableInstall() {
+            // التوجيه إلى خادم تحميل مباشر يعمل بدون تعليق وموثق للآيفون لتثبيت التطبيق بنجاح
+            window.open("https://delta.bz", "_blank");
         }
     </script>
 </body>
