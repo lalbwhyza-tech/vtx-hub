@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHD HUB — هاك دلتا للايفون</title>
+    <title>RTX HUB — هاك دلتا للايفون</title>
     <style>
         :root {
-            --bg-color: #000712; 
-            --card-bg: rgba(0, 25, 50, 0.65);
-            --neon-blue: #00bfff; 
-            --neon-accent: #0066ff; 
+            --bg-color: #000915; /* خلفية زرقاء داكنة جداً */
+            --card-bg: rgba(0, 20, 45, 0.65);
+            --neon-blue: #00d2ff; /* لون أزرق مشع */
+            --neon-accent: #0066ff; /* لون أزرق نيون */
             --text-color: #ffffff;
         }
 
@@ -25,24 +25,25 @@
             min-height: 100vh;
         }
 
+        /* شريط التنقل العلوي مع الاحتفاظ بشعار RTX */
         .navbar {
             width: 100%;
             max-width: 450px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             padding: 0 10px;
         }
 
         .brand-logo {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             font-weight: 900;
             background: linear-gradient(to right, var(--neon-accent), var(--neon-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
         }
 
         .menu-icon {
@@ -68,13 +69,14 @@
             font-weight: 900;
         }
 
+        /* كرت الصورة الرئيسي لـ Delta */
         .image-card {
             background: var(--card-bg);
-            border: 2px solid rgba(0, 191, 255, 0.25);
+            border: 2px solid rgba(0, 210, 255, 0.25);
             border-radius: 24px;
             padding: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 191, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 210, 255, 0.2);
         }
 
         .delta-banner {
@@ -84,6 +86,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
+        /* قسم المميزات باللون الأزرق والنجوم المضيئة */
         .features-section {
             margin-bottom: 30px;
         }
@@ -115,6 +118,7 @@
             text-shadow: 0 0 8px var(--neon-blue);
         }
 
+        /* شارات الحالة المضيئة */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -131,40 +135,6 @@
             box-shadow: inset 0 0 10px rgba(0, 255, 102, 0.1);
         }
 
-        .install-btn {
-            background: linear-gradient(135deg, #0044ee, #00bfff);
-            color: #ffffff;
-            border: none;
-            width: 100%;
-            padding: 16px;
-            border-radius: 16px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.35);
-            transition: all 0.3s ease;
-            margin-bottom: 15px;
-        }
-
-        .install-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.55);
-        }
-
-        .install-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
         .status-badge-failed {
             display: inline-flex;
             align-items: center;
@@ -179,23 +149,59 @@
             font-size: 1rem;
             margin-bottom: 25px;
         }
+
+        /* أزرار التثبيت الزرقاء المشعة والمطورة */
+        .install-btn {
+            background: linear-gradient(135deg, #0044ee, #00bfff);
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 210, 255, 0.55);
+        }
+
+        .install-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
     </style>
 </head>
 <body>
 
+    <!-- الهيدر مع الحفاظ التام على شعار RTX -->
     <div class="navbar">
-        <div class="brand-logo">SHD</div>
+        <div class="brand-logo">RTX</div>
         <div class="menu-icon">☰</div>
     </div>
 
     <div class="content-container">
         <div class="welcome-title">
-            مرحباً بك في موقع <span>SHD</span> هنا لدينا هاك<br>دلتا للايفون
+            مرحباً بك في موقع <span>RTX</span> هنا لدينا هاك<br>دلتا للايفون
         </div>
 
         <div class="image-card">
-            <!-- رابط الصورة مشفر ومباشر عبر خادم مخصص للمواقع لمنع التعليق -->
-            <img class="delta-banner" src="https://imgbox.com" alt="Delta Executor Ninja">
+            <!-- رابط صورة ثابت لبانر دلتا نينجا -->
+            <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
         </div>
 
         <div class="features-section">
@@ -221,7 +227,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت الذي يفتح صفحة التثبيت الفورية مباشرة بدون تعليق -->
+        <!-- زر التثبيت الأول -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -230,12 +236,19 @@
         <div>
             <div class="status-badge-failed">لا يعمل ✕</div>
         </div>
+
+        <!-- زر التثبيت الثاني -->
+        <button class="install-btn" onclick="triggerDirectInstall()">
+            Delta Install
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        </button>
     </div>
 
     <script>
         function triggerDirectInstall() {
-            // كود فك التعليق وفتح صفحة التثبيت الآمنة لـ BetaDrop
-            window.location.href = "https://betadrop.app";
+            // كود استدعاء بروتوكول أبل اللاسلكي OTA لتنبثق نافذة (إلغاء / تثبيت) مباشرة فوق الصفحة
+            const plistUrl = "https://betadrop.app";
+            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
         }
     </script>
 </body>
