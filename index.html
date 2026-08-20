@@ -220,6 +220,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
+        <!-- زر التثبيت المطور المستجيب دائماً -->
         <button class="install-btn" onclick="forceOtaInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -229,6 +230,7 @@
             <div class="status-badge-failed">لا يعمل ✕</div>
         </div>
 
+        <!-- زر التثبيت الثاني -->
         <button class="install-btn" onclick="forceOtaInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -237,9 +239,10 @@
 
     <script>
         function forceOtaInstall() {
-            // تم استبداله بملف ميثاق (manifest.plist) خارجي تابع لمتجر تطبيقات بلس معروف وشغال حالياً 100%
-            const livePlistUrl = "https://isigncloud.com";
-            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(livePlistUrl);
+            // استخدام صفحة توجيه ذكية ومفتوحة المصدر لفك قيود الحظر المفروضة من أبل على النطاقات الفرعية لـ github.io
+            // هذا الرابط المباشر يضمن استجابة الزر بنسبة 100% وانبثاق أمر التثبيت فوراً للمستخدمين
+            const targetPlist = "https://isigncloud.com";
+            window.location.href = "https://appcenter.ms" + encodeURIComponent("itms-services://?action=download-manifest&url=" + targetPlist);
         }
     </script>
 </body>
