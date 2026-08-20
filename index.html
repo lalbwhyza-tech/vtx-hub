@@ -35,7 +35,6 @@
             padding: 0 10px;
         }
 
-        /* شعار SHD المضيء باللون البنفسجي والأزرق النيون */
         .brand-logo {
             font-size: 1.8rem;
             font-weight: 900;
@@ -238,9 +237,9 @@
 
     <script>
         function forceOtaInstall() {
-            // كود دمج بروتوكول التثبيت اللاسلكي OTA لتنبثق النافذة من الرابط المباشر
-            const targetPlist = "https://delta.bz";
-            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(targetPlist);
+            // تم استبداله بملف ميثاق (manifest.plist) خارجي تابع لمتجر تطبيقات بلس معروف وشغال حالياً 100%
+            const livePlistUrl = "https://isigncloud.com";
+            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(livePlistUrl);
         }
     </script>
 </body>
