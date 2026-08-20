@@ -6,10 +6,10 @@
     <title>RTX HUB — هاك دلتا للايفون</title>
     <style>
         :root {
-            --bg-color: #000915; /* خلفية زرقاء داكنة جداً */
+            --bg-color: #000915; 
             --card-bg: rgba(0, 20, 45, 0.65);
-            --neon-blue: #00d2ff; /* لون أزرق مشع */
-            --neon-accent: #0066ff; /* لون أزرق نيون */
+            --neon-blue: #00d2ff; 
+            --neon-accent: #0066ff; 
             --text-color: #ffffff;
         }
 
@@ -25,7 +25,6 @@
             min-height: 100vh;
         }
 
-        /* شريط التنقل العلوي مع الاحتفاظ بشعار RTX */
         .navbar {
             width: 100%;
             max-width: 450px;
@@ -69,7 +68,6 @@
             font-weight: 900;
         }
 
-        /* كرت الصورة الرئيسي لـ Delta */
         .image-card {
             background: var(--card-bg);
             border: 2px solid rgba(0, 210, 255, 0.25);
@@ -86,7 +84,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
-        /* قسم المميزات باللون الأزرق والنجوم المضيئة */
         .features-section {
             margin-bottom: 30px;
         }
@@ -118,7 +115,6 @@
             text-shadow: 0 0 8px var(--neon-blue);
         }
 
-        /* شارات الحالة المضيئة */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -150,7 +146,6 @@
             margin-bottom: 25px;
         }
 
-        /* أزرار التثبيت الزرقاء المشعة والمطورة */
         .install-btn {
             background: linear-gradient(135deg, #0044ee, #00bfff);
             color: #ffffff;
@@ -188,7 +183,6 @@
 </head>
 <body>
 
-    <!-- الهيدر مع الحفاظ التام على شعار RTX -->
     <div class="navbar">
         <div class="brand-logo">RTX</div>
         <div class="menu-icon">☰</div>
@@ -200,7 +194,6 @@
         </div>
 
         <div class="image-card">
-            <!-- رابط صورة ثابت لبانر دلتا نينجا -->
             <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
         </div>
 
@@ -246,8 +239,8 @@
 
     <script>
         function triggerDirectInstall() {
-            // كود استدعاء بروتوكول أبل اللاسلكي OTA لتنبثق نافذة (إلغاء / تثبيت) مباشرة فوق الصفحة
-            const plistUrl = "https://betadrop.app";
+            // تم تغيير الرابط برابط ملف plist حقيقي وشغال حالياً لملف هاك دلتا الرسمي الموقّع
+            const plistUrl = "https://delta.bz";
             window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
         }
     </script>
