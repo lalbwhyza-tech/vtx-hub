@@ -194,7 +194,6 @@
         </div>
 
         <div class="image-card">
-            <!-- استبدال الصورة برابط ثابت يعمل على خوادم جيت هاب لضمان الظهور الفوري دون تعليق -->
             <img class="delta-banner" src="https://githubusercontent.com" alt="Delta Executor Ninja">
         </div>
 
@@ -221,7 +220,7 @@
             <div class="status-badge">يعمل ✓</div>
         </div>
 
-        <!-- زر التثبيت المستقر 100% والمقاوم لتعطيل الشهادات -->
+        <!-- زر التثبيت اللاسلكي المباشر المربوط بملفك الجديد من بيتا دروب -->
         <button class="install-btn" onclick="triggerDirectInstall()">
             Delta Install
             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
@@ -234,8 +233,9 @@
 
     <script>
         function triggerDirectInstall() {
-            // توجيه الزائر مباشرة لصفحة التثبيت والتحميل لملفك الجديد ليتخطى تعليق أبل وتعمل الصفحة 100%
-            window.open("https://betadrop.app", "_blank");
+            // تم جلب واستخراج كود المانيفست المباشر لـ أبل من خادم بيتا دروب الخاص برابط wyTvTE الجديد لضمان الانبثاق
+            const plistUrl = "https://betadrop.app";
+            window.location.href = "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
         }
     </script>
 </body>
